@@ -1,0 +1,19 @@
+{
+  "name": "commentkeyword",
+  "version": "0.1.0",
+  "description": "Plan the \"Comment KEYWORD\" CTA of an Instagram Reel and set up the automatic DM in CommentKeyword from Claude Code.",
+  "author": { "name": "CommentKeyword", "url": "https://commentkeyword.com" },
+  "homepage": "https://commentkeyword.com/instagram-automation-api",
+  "repository": "https://github.com/commentkeyword/agent-toolkit",
+  "license": "MIT",
+  "keywords": ["instagram", "reels", "comment-to-dm", "cta", "video", "automation"],
+  "userConfig": {
+    "api_token": {
+      "type": "string",
+      "title": "CommentKeyword API token",
+      "description": "Create one at https://commentkeyword.com/settings?tab=api with keywords:read, keywords:write and agents:read.",
+      "required": true,
+      "sensitive": true
+    }
+  }
+}

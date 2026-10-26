@@ -1,0 +1,12 @@
+{
+  "name": "commentkeyword",
+  "description": "Official CommentKeyword plugins for Claude Code.",
+  "owner": { "name": "CommentKeyword", "url": "https://commentkeyword.com" },
+  "plugins": [
+    {
+      "name": "commentkeyword",
+      "source": "./",
+      "description": "Plan the \"Comment KEYWORD\" CTA of an Instagram Reel and set up the automatic DM in CommentKeyword."
+    }
+  ]
+}
