@@ -98,6 +98,14 @@ Without the MCP server, the skill still plans the CTA and the DM. It can also ca
 | `COMMENTKEYWORD_API_TOKEN` | Required. Your personal access token. |
 | `COMMENTKEYWORD_API_URL` | Optional. Defaults to `https://commentkeyword.com/api`. |
 
+## Network and data
+
+- **One destination.** The MCP server and the skill's curl examples only call the CommentKeyword API, at `https://commentkeyword.com/api` (or `COMMENTKEYWORD_API_URL` if you set it). No telemetry, no other hosts.
+- **What gets sent:** your API token (as a Bearer header) and the automation you confirm: keyword, DM and reply text, target posts and options.
+- **What comes back:** your keyword automations and the names of your AI agents.
+- **Nothing on disk.** The server stores nothing locally.
+- **Privacy policy:** https://commentkeyword.com/privacy
+
 ## Safety
 
 - **Every automation messages real people.** The skill and the tool descriptions tell the agent to confirm the keyword, the DM and the target with you before creating or activating anything.
