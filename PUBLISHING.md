@@ -106,7 +106,7 @@ pair, replace the variable, and log in with the new private key.
 
 ## 5. Smithery (not used)
 
-Smithery shut down its accounts, API, CLI and hosted proxy on 2026-10-31. smithery.ai continues as a
+Smithery shuts down its accounts, API, CLI and hosted proxy on 2026-10-31. smithery.ai continues as a
 curated directory that lists vendors' remote MCP URLs, so there is nothing to publish there for a
 local stdio server. Revisit if CommentKeyword ships a hosted remote MCP server.
 
