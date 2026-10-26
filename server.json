@@ -14,7 +14,7 @@
       "registryType": "mcpb",
       "identifier": "https://github.com/commentkeyword/agent-toolkit/releases/download/v0.2.0/commentkeyword-mcp-0.2.0.mcpb",
       "version": "0.2.0",
-      "fileSha256": "779a66b43059c4fb67616dac53cef7a19f4e678b1b86e85533aac9087bbe7964",
+      "fileSha256": "1ba621458b737216bf8b70450439166617074254767962241865e56e3e1116f4",
       "transport": {
         "type": "stdio"
       },
