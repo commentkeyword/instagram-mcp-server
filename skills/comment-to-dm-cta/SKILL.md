@@ -1,8 +1,8 @@
 ---
 name: comment-to-dm-cta
-description: Plan the "Comment KEYWORD and I'll DM you the link" call to action of an Instagram Reel or post, then set up the automatic DM in CommentKeyword so every commenter actually gets it. Use when editing, scripting, captioning or publishing a short-form video whose CTA asks viewers to comment a word, or when the user asks to set up comment-to-DM, "comment X to get Y", or a keyword auto-DM on Instagram.
+description: "Plan the \"Comment KEYWORD and I'll DM you the link\" call to action of an Instagram Reel or post, then set up the automatic DM in CommentKeyword so every commenter actually gets it. Use when editing, scripting, captioning or publishing a short-form video whose CTA asks viewers to comment a word, or when the user asks to set up comment-to-DM, \"comment X to get Y\", or a keyword auto-DM on Instagram."
 license: MIT
-compatibility: Setting up the DM needs the CommentKeyword MCP server (bundled in the commentkeyword Claude Code plugin) or network access to commentkeyword.com plus a CommentKeyword API token. Steps 1-4 work without either.
+compatibility: "Setting up the DM needs the CommentKeyword MCP server (bundled in the commentkeyword Claude Code plugin) or network access to commentkeyword.com plus a CommentKeyword API token. Steps 1-4 work without either."
 ---
 
 # Comment-to-DM CTA

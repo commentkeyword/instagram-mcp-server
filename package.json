@@ -1,46 +1,25 @@
 {
   "name": "commentkeyword-mcp",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "MCP server and agent skill for CommentKeyword: set up Instagram comment-to-DM keyword automations from Claude and other AI agents.",
   "license": "MIT",
   "author": "CommentKeyword (https://commentkeyword.com)",
-  "homepage": "https://commentkeyword.com/instagram-automation-api",
+  "homepage": "https://commentkeyword.com/instagram-mcp-server",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/commentkeyword/agent-toolkit.git"
   },
-  "keywords": [
-    "mcp",
-    "model-context-protocol",
-    "claude",
-    "agent-skills",
-    "instagram",
-    "comment-to-dm",
-    "reels",
-    "automation"
-  ],
+  "keywords": ["mcp", "model-context-protocol", "claude", "agent-skills", "instagram", "comment-to-dm", "reels", "automation"],
   "type": "module",
   "bin": {
-    "commentkeyword-mcp": "dist/index.mjs"
+    "commentkeyword-mcp": "server/commentkeyword-mcp.mjs"
   },
-  "files": [
-    "dist",
-    "README.md",
-    "LICENSE"
-  ],
+  "files": ["server", "README.md", "LICENSE"],
   "engines": {
     "node": ">=18"
   },
   "scripts": {
-    "build": "esbuild src/index.ts --bundle --platform=node --format=esm --target=node18 --outfile=dist/index.mjs --banner:js=\"#!/usr/bin/env node\"",
-    "typecheck": "tsc --noEmit",
-    "test": "npm run build && node --test \"test/*.test.mjs\""
-  },
-  "devDependencies": {
-    "@modelcontextprotocol/sdk": "^1.32.2",
-    "@types/node": "^26.6.5",
-    "esbuild": "^0.28.2",
-    "typescript": "^7.0.2",
-    "zod": "^4.6.7"
+    "start": "node server/commentkeyword-mcp.mjs",
+    "test": "node --test \"test/*.test.mjs\""
   }
 }

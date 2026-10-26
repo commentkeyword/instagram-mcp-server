@@ -72,6 +72,14 @@ Add the server to the client's MCP config. For Claude Desktop that file is `clau
 
 ### Skill only (Claude.ai, Claude Desktop, other agents that read `SKILL.md`)
 
+With the [skills CLI](https://skills.sh) (Claude Code, Cursor, Codex and other agents):
+
+```bash
+npx skills add commentkeyword/agent-toolkit
+```
+
+Or by hand:
+
 1. Download [`skills/comment-to-dm-cta`](skills/comment-to-dm-cta) as a folder and zip it.
 2. In Claude, upload the zip under **Customize → Skills → Upload a skill**.
 
@@ -115,12 +123,10 @@ Without the MCP server, the skill still plans the CTA and the DM. It can also ca
 ## Development
 
 ```bash
-npm install
-npm test           # builds dist/index.mjs and runs the end-to-end tests against a mock API
-npm run typecheck
+npm test   # end-to-end tests: spawns the server over stdio against a mock API
 ```
 
-`dist/index.mjs` is committed on purpose. It is a single bundled file, so the plugin and `npx github:` work without a build step. Rebuild it with `npm run build` whenever you change `src/`.
+The MCP server has no dependencies and no build step. It is two readable files in [`server/`](server): `core.mjs` holds the tools, the validation and the JSON-RPC handling; `commentkeyword-mcp.mjs` is the stdio entry point. It needs Node 18 or newer.
 
 ## License
 
