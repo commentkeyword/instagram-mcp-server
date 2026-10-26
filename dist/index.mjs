@@ -28639,13 +28639,16 @@ var CommentKeywordClient = class {
   baseUrl;
   fetchImpl;
   userAgent;
+  missingTokenMessage;
   constructor(options) {
     this.token = options.token;
+    this.missingTokenMessage = options.missingTokenMessage;
     this.baseUrl = (options.baseUrl || DEFAULT_BASE_URL).replace(/\/+$/, "");
     this.fetchImpl = options.fetch ?? fetch;
     this.userAgent = options.userAgent ?? "commentkeyword-mcp";
   }
   async request(method, path, options = {}) {
+    if (this.missingTokenMessage) throw new Error(this.missingTokenMessage);
     const url2 = new URL(this.baseUrl + path);
     for (const [key, value] of Object.entries(options.query ?? {})) {
       if (value !== void 0 && value !== null && value !== "") url2.searchParams.set(key, String(value));
@@ -36900,16 +36903,13 @@ function createServer(client2) {
 }
 
 // src/index.ts
+var MISSING_TOKEN = "COMMENTKEYWORD_API_TOKEN is not set. Create a token in CommentKeyword (Settings \u2192 API, https://commentkeyword.com/settings?tab=api) and pass it to this server as an environment variable.";
 var token = process.env.COMMENTKEYWORD_API_TOKEN?.trim();
-if (!token) {
-  console.error(
-    "COMMENTKEYWORD_API_TOKEN is not set. Create a token in CommentKeyword (Settings \u2192 API, https://commentkeyword.com/settings?tab=api) and pass it to this server as an environment variable."
-  );
-  process.exit(1);
-}
+if (!token) console.error(MISSING_TOKEN);
 var client = new CommentKeywordClient({
-  token,
+  token: token ?? "",
   baseUrl: process.env.COMMENTKEYWORD_API_URL?.trim() || DEFAULT_BASE_URL,
-  userAgent: `commentkeyword-mcp/${SERVER_VERSION}`
+  userAgent: `commentkeyword-mcp/${SERVER_VERSION}`,
+  missingTokenMessage: token ? void 0 : MISSING_TOKEN
 });
 await createServer(client).connect(new StdioServerTransport());

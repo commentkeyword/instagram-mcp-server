@@ -38,6 +38,8 @@ export interface ClientOptions {
   baseUrl?: string;
   fetch?: typeof fetch;
   userAgent?: string;
+  /** When set, every request fails with this message instead of calling the API. */
+  missingTokenMessage?: string;
 }
 
 export class CommentKeywordClient {
@@ -45,15 +47,19 @@ export class CommentKeywordClient {
   private readonly baseUrl: string;
   private readonly fetchImpl: typeof fetch;
   private readonly userAgent: string;
+  private readonly missingTokenMessage?: string;
 
   constructor(options: ClientOptions) {
     this.token = options.token;
+    this.missingTokenMessage = options.missingTokenMessage;
     this.baseUrl = (options.baseUrl || DEFAULT_BASE_URL).replace(/\/+$/, '');
     this.fetchImpl = options.fetch ?? fetch;
     this.userAgent = options.userAgent ?? 'commentkeyword-mcp';
   }
 
   async request(method: string, path: string, options: { query?: Record<string, unknown>; body?: unknown } = {}): Promise<unknown> {
+    if (this.missingTokenMessage) throw new Error(this.missingTokenMessage);
+
     const url = new URL(this.baseUrl + path);
     for (const [key, value] of Object.entries(options.query ?? {})) {
       if (value !== undefined && value !== null && value !== '') url.searchParams.set(key, String(value));

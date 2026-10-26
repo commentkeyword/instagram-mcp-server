@@ -105,3 +105,19 @@ test('delete only confirms when asked', async () => {
   await client.callTool({ name: 'delete_keyword', arguments: { id, confirm: true } });
   assert.equal(requests.at(-1).url, `/api/keywords/${id}?confirm=true`);
 });
+
+test('starts without a token and reports it on tool calls', async () => {
+  const env = { ...process.env };
+  delete env.COMMENTKEYWORD_API_TOKEN;
+  const noToken = new Client({ name: 'test-no-token', version: '0.0.0' });
+  await noToken.connect(new StdioClientTransport({ command: process.execPath, args: [serverPath], env, stderr: 'ignore' }));
+  try {
+    const { tools } = await noToken.listTools();
+    assert.equal(tools.length, 6);
+    const result = await noToken.callTool({ name: 'list_keywords', arguments: {} });
+    assert.equal(result.isError, true);
+    assert.match(result.content[0].text, /COMMENTKEYWORD_API_TOKEN is not set/);
+  } finally {
+    await noToken.close();
+  }
+});
