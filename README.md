@@ -63,7 +63,7 @@ Add the server to the client's MCP config. For Claude Desktop that file is `clau
   "mcpServers": {
     "commentkeyword": {
       "command": "npx",
-      "args": ["-y", "github:commentkeyword/agent-toolkit"],
+      "args": ["-y", "github:commentkeyword/agent-toolkit#v0.2.0"],
       "env": { "COMMENTKEYWORD_API_TOKEN": "YOUR_TOKEN" }
     }
   }
