@@ -25,8 +25,9 @@ const keywordFields = {
   dmMessages: z
     .array(z.string().min(1))
     .min(1)
+    .max(10)
     .describe(
-      'DM variants; one is picked at random per commenter. Usually one message with the promised link. Max 1,000 characters each. Supports {{handle}}, {{name}}, {{namefirst}}.',
+      'DM variants (1-10); one is picked at random per commenter, so 2-3 wordings of the same message feel less robotic. Each must deliver the promised link. Max 1,000 characters each. Supports {{handle}}, {{name}}, {{namefirst}}.',
     ),
   matchMode: z
     .enum(['contains', 'exact'])
@@ -39,7 +40,8 @@ const keywordFields = {
     .describe('Instagram media IDs. Required for target "specific_posts"; with "next_post" they are matched too.'),
   commentReplies: z
     .array(z.string().min(1))
-    .describe('Optional public reply variants posted under the comment, e.g. "Sent! Check your DMs {{namefirst}}". Max 500 characters each.'),
+    .max(10)
+    .describe('Optional public reply variants (up to 10), one picked at random per comment, e.g. "Sent! Check your DMs {{namefirst}}". Max 500 characters each.'),
   publicReplyEnabled: z.boolean().describe('Post one of commentReplies publicly. Defaults to true when commentReplies is not empty.'),
   trackLinks: z.boolean().describe('Replace links in the DM with tracked links to count clicks.'),
   isActive: z.boolean().describe('Create it active (default) or paused. Only active keywords count toward the plan limit.'),
@@ -47,7 +49,9 @@ const keywordFields = {
     .string()
     .uuid()
     .nullable()
-    .describe('Optional publicId of a Live AI agent (see list_agents) that continues the conversation when the person replies. Paid plans only.'),
+    .describe(
+      'Optional publicId of an existing Live AI agent (from list_agents) that takes over the conversation when the person replies to the DM. Its conversation hook is appended to the DM. Only works on paid plans; on Free the agent is ignored. null detaches it.',
+    ),
 };
 
 function scopeFor(t: z.infer<typeof target>, mediaIds: string[] | undefined) {
@@ -162,7 +166,7 @@ export function createServer(client: CommentKeywordClient): McpServer {
         matchMode: keywordFields.matchMode.optional(),
         matchWithoutAccents: keywordFields.matchWithoutAccents.optional(),
         mediaIds: keywordFields.mediaIds.optional(),
-        commentReplies: z.array(z.string().min(1)).optional().describe('Replaces all public reply variants. Pass [] with publicReplyEnabled false to stop public replies.'),
+        commentReplies: z.array(z.string().min(1)).max(10).optional().describe('Replaces all public reply variants (up to 10). Pass [] with publicReplyEnabled false to stop public replies.'),
         publicReplyEnabled: keywordFields.publicReplyEnabled.optional(),
         trackLinks: keywordFields.trackLinks.optional(),
         isActive: keywordFields.isActive.optional(),
@@ -196,7 +200,7 @@ export function createServer(client: CommentKeywordClient): McpServer {
     'list_agents',
     {
       title: 'List AI agents',
-      description: 'List the AI agents in the workspace. A Live agent can be attached to a keyword (aiAgentId) to keep chatting after the first DM.',
+      description: 'List the AI agents already set up in the workspace (agents are created and edited in the CommentKeyword dashboard). Pass the publicId of a Live agent as aiAgentId to create_keyword or update_keyword so it keeps chatting after the first DM.',
       inputSchema: {},
       annotations: { readOnlyHint: true, openWorldHint: true },
     },

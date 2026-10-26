@@ -14,10 +14,6 @@ the video is still in the edit and publish afterwards (with `/publish-social` or
 > paid plans start at $12/month. The toolkit only talks to it when you run this tool with a token
 > you created. Instagram only.
 
-Other ways to deliver the DM: reply to comments by hand, another comment-to-DM tool (ManyChat,
-LinkDM and others), or a self-hosted open-source one such as
-[OpenReply](https://github.com/diwenne/openreply).
-
 ---
 
 ## One-time setup

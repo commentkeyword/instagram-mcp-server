@@ -36748,17 +36748,19 @@ var target = external_exports.enum(["next_post", "all_posts", "specific_posts"])
 );
 var keywordFields = {
   keyword: external_exports.string().min(1).max(100).describe('The word people comment, e.g. "GUIDE". Matching is case-insensitive. Prefer one distinctive word.'),
-  dmMessages: external_exports.array(external_exports.string().min(1)).min(1).describe(
-    "DM variants; one is picked at random per commenter. Usually one message with the promised link. Max 1,000 characters each. Supports {{handle}}, {{name}}, {{namefirst}}."
+  dmMessages: external_exports.array(external_exports.string().min(1)).min(1).max(10).describe(
+    "DM variants (1-10); one is picked at random per commenter, so 2-3 wordings of the same message feel less robotic. Each must deliver the promised link. Max 1,000 characters each. Supports {{handle}}, {{name}}, {{namefirst}}."
   ),
   matchMode: external_exports.enum(["contains", "exact"]).describe('contains (default): the comment only has to include the keyword, e.g. "GUIDE please!". exact: the whole comment must be the keyword.'),
   matchWithoutAccents: external_exports.boolean().describe('Only for keywords with Latin accents: also match the unaccented spelling (e.g. "gu\xEDa" also matches "guia").'),
   mediaIds: external_exports.array(external_exports.string().min(1)).describe('Instagram media IDs. Required for target "specific_posts"; with "next_post" they are matched too.'),
-  commentReplies: external_exports.array(external_exports.string().min(1)).describe('Optional public reply variants posted under the comment, e.g. "Sent! Check your DMs {{namefirst}}". Max 500 characters each.'),
+  commentReplies: external_exports.array(external_exports.string().min(1)).max(10).describe('Optional public reply variants (up to 10), one picked at random per comment, e.g. "Sent! Check your DMs {{namefirst}}". Max 500 characters each.'),
   publicReplyEnabled: external_exports.boolean().describe("Post one of commentReplies publicly. Defaults to true when commentReplies is not empty."),
   trackLinks: external_exports.boolean().describe("Replace links in the DM with tracked links to count clicks."),
   isActive: external_exports.boolean().describe("Create it active (default) or paused. Only active keywords count toward the plan limit."),
-  aiAgentId: external_exports.string().uuid().nullable().describe("Optional publicId of a Live AI agent (see list_agents) that continues the conversation when the person replies. Paid plans only.")
+  aiAgentId: external_exports.string().uuid().nullable().describe(
+    "Optional publicId of an existing Live AI agent (from list_agents) that takes over the conversation when the person replies to the DM. Its conversation hook is appended to the DM. Only works on paid plans; on Free the agent is ignored. null detaches it."
+  )
 };
 function scopeFor(t, mediaIds) {
   switch (t) {
@@ -36863,7 +36865,7 @@ function createServer(client2) {
         matchMode: keywordFields.matchMode.optional(),
         matchWithoutAccents: keywordFields.matchWithoutAccents.optional(),
         mediaIds: keywordFields.mediaIds.optional(),
-        commentReplies: external_exports.array(external_exports.string().min(1)).optional().describe("Replaces all public reply variants. Pass [] with publicReplyEnabled false to stop public replies."),
+        commentReplies: external_exports.array(external_exports.string().min(1)).max(10).optional().describe("Replaces all public reply variants (up to 10). Pass [] with publicReplyEnabled false to stop public replies."),
         publicReplyEnabled: keywordFields.publicReplyEnabled.optional(),
         trackLinks: keywordFields.trackLinks.optional(),
         isActive: keywordFields.isActive.optional(),
@@ -36893,7 +36895,7 @@ function createServer(client2) {
     "list_agents",
     {
       title: "List AI agents",
-      description: "List the AI agents in the workspace. A Live agent can be attached to a keyword (aiAgentId) to keep chatting after the first DM.",
+      description: "List the AI agents already set up in the workspace (agents are created and edited in the CommentKeyword dashboard). Pass the publicId of a Live agent as aiAgentId to create_keyword or update_keyword so it keeps chatting after the first DM.",
       inputSchema: {},
       annotations: { readOnlyHint: true, openWorldHint: true }
     },

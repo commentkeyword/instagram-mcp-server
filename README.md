@@ -12,6 +12,8 @@ This repository is the official CommentKeyword toolkit for AI agents. It contain
 
 [CommentKeyword](https://commentkeyword.com) sends the DM to everyone who comments the keyword on your post or reel. It uses Meta's official Instagram API.
 
+> **You need a CommentKeyword account** (the Free plan works) with an Instagram professional account connected, plus an API token. This repo is MIT-licensed; the CommentKeyword service it talks to is a hosted product with free and paid plans. See [Before you start](#before-you-start).
+
 ## How it works
 
 ```
@@ -85,11 +87,11 @@ Without the MCP server, the skill still plans the CTA and the DM. It can also ca
 
 | Tool | What it does |
 |---|---|
-| `create_keyword` | Create an automation. `target` is `next_post`, `all_posts` or `specific_posts`. Also takes the DM variants, optional public replies, link tracking and an optional AI agent. |
+| `create_keyword` | Create an automation. `target` is `next_post`, `all_posts` or `specific_posts`. Also takes up to 10 DM variants, up to 10 public reply variants, link tracking, and an existing AI agent to attach (`aiAgentId`, paid plans). |
 | `update_keyword` | Change any field. Re-arm it for the next upload with `target: "next_post"`, or pause it with `isActive: false`. |
 | `list_keywords` / `get_keyword` | Check for conflicts and see whether the next post was caught (`nextPostStatus`). |
 | `delete_keyword` | Delete an automation. Asks for confirmation when an AI agent is attached. |
-| `list_agents` | List AI agents that can continue the conversation after the first DM. |
+| `list_agents` | List the AI agents already set up in your dashboard, so one can be attached to a keyword to continue the conversation after the first DM. Agents are created and edited in the dashboard, not through the API. |
 
 | Environment variable | |
 |---|---|

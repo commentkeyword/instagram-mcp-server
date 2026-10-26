@@ -47,9 +47,10 @@ Use the exact same word everywhere:
   - Example: `Here's the guide, {{namefirst}} 👉 https://example.com/guide`
   - Placeholders: `{{handle}}`, `{{name}}`, `{{namefirst}}`.
   - Limit: 1,000 characters.
-- **Several variants** (2-3 wordings) feel less robotic. One is picked at random for each person.
+- **Several variants** (2-3 wordings, up to 10) feel less robotic. One is picked at random for each person. The same goes for public replies.
 - **A public reply** under the comment (e.g. `Sent! Check your DMs {{namefirst}} 📩`) shows other viewers that it works. That brings in more comments. Limit: 500 characters.
 - **Track link clicks** (`trackLinks`) if the user wants click numbers.
+- **AI agent (optional, paid plans).** Call `list_agents`. If the workspace already has a Live agent that fits the offer (e.g. a sales or booking agent), offer to attach it with `aiAgentId`: it takes over when the person replies to the DM. Agents are created and edited in the CommentKeyword dashboard, not from here. If there's none, skip this step. On the Free plan an attached agent is ignored.
 - **What Instagram allows** (so set expectations):
   - The DM is a *private reply* to the comment: one message per comment, sent within 7 days of it.
   - The conversation can only go further if the person writes back.
@@ -59,7 +60,7 @@ Use the exact same word everywhere:
 
 Show the user a summary and wait for an explicit OK, because this messages real people:
 
-> **Keyword:** GUIDE (contains) · **Posts:** next post or reel you publish · **DM:** "Here's the guide, {{namefirst}} 👉 …" · **Public reply:** "Sent! Check your DMs 📩"
+> **Keyword:** GUIDE (contains) · **Posts:** next post or reel you publish · **DM:** "Here's the guide, {{namefirst}} 👉 …" (+2 variants) · **Public reply:** "Sent! Check your DMs 📩" · **AI agent:** none
 
 Choose the target:
 
