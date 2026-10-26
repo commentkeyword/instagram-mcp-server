@@ -1,0 +1,77 @@
+{
+  "$schema": "https://raw.githubusercontent.com/modelcontextprotocol/mcpb/main/schemas/mcpb-manifest-v0.3.schema.json",
+  "manifest_version": "0.3",
+  "name": "commentkeyword",
+  "display_name": "CommentKeyword",
+  "version": "0.2.0",
+  "description": "Create and manage Instagram comment-to-DM keyword automations in CommentKeyword.",
+  "long_description": "Set up an Instagram \"Comment GUIDE and I'll DM you the link\" automation from your AI agent. The server creates, re-targets, pauses and deletes keyword automations through the CommentKeyword API, and can attach an AI agent you already set up in the dashboard.\n\nYou need a CommentKeyword account (the Free plan works) with an Instagram professional account connected, and an API token from Settings → API (https://commentkeyword.com/settings?tab=api) with `keywords:read`, `keywords:write` and `agents:read`. Add `keywords:delete` only if you want the agent to be able to delete automations.\n\nThe server only talks to https://commentkeyword.com/api and stores nothing on disk. Every automation messages real people, so the tools tell the agent to confirm the keyword, the DM and the target with you first.",
+  "author": {
+    "name": "CommentKeyword",
+    "url": "https://commentkeyword.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/commentkeyword/agent-toolkit.git"
+  },
+  "homepage": "https://commentkeyword.com/instagram-mcp-server",
+  "documentation": "https://github.com/commentkeyword/agent-toolkit#readme",
+  "support": "https://github.com/commentkeyword/agent-toolkit/issues",
+  "server": {
+    "type": "node",
+    "entry_point": "server/commentkeyword-mcp.mjs",
+    "mcp_config": {
+      "command": "node",
+      "args": ["${__dirname}/server/commentkeyword-mcp.mjs"],
+      "env": {
+        "COMMENTKEYWORD_API_TOKEN": "${user_config.api_token}"
+      }
+    }
+  },
+  "tools": [
+    {
+      "name": "list_keywords",
+      "description": "List the comment-keyword automations in the workspace, newest first."
+    },
+    {
+      "name": "get_keyword",
+      "description": "Get one keyword automation, including whether it is still waiting for the next post."
+    },
+    {
+      "name": "create_keyword",
+      "description": "Create a comment-to-DM automation for the next post, all posts or specific posts."
+    },
+    {
+      "name": "update_keyword",
+      "description": "Change a keyword automation: re-target it, edit the DM, or pause it."
+    },
+    {
+      "name": "delete_keyword",
+      "description": "Permanently delete a keyword automation (asks for confirmation when an AI agent is attached)."
+    },
+    {
+      "name": "list_agents",
+      "description": "List the AI agents set up in the dashboard, to attach one to a keyword."
+    }
+  ],
+  "tools_generated": false,
+  "prompts_generated": false,
+  "keywords": ["instagram", "comment-to-dm", "dm", "reels", "keyword", "automation", "marketing"],
+  "license": "MIT",
+  "privacy_policies": ["https://commentkeyword.com/privacy"],
+  "compatibility": {
+    "platforms": ["darwin", "win32", "linux"],
+    "runtimes": {
+      "node": ">=18.0.0"
+    }
+  },
+  "user_config": {
+    "api_token": {
+      "type": "string",
+      "title": "CommentKeyword API token",
+      "description": "Create one at https://commentkeyword.com/settings?tab=api with keywords:read, keywords:write and agents:read.",
+      "sensitive": true,
+      "required": true
+    }
+  }
+}

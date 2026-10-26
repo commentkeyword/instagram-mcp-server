@@ -1,0 +1,39 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "com.commentkeyword/mcp",
+  "title": "CommentKeyword",
+  "description": "Create and manage Instagram comment-to-DM keyword automations in CommentKeyword.",
+  "websiteUrl": "https://commentkeyword.com/instagram-mcp-server",
+  "repository": {
+    "url": "https://github.com/commentkeyword/agent-toolkit",
+    "source": "github"
+  },
+  "version": "0.2.0",
+  "packages": [
+    {
+      "registryType": "mcpb",
+      "identifier": "https://github.com/commentkeyword/agent-toolkit/releases/download/v0.2.0/commentkeyword-mcp-0.2.0.mcpb",
+      "version": "0.2.0",
+      "fileSha256": "779a66b43059c4fb67616dac53cef7a19f4e678b1b86e85533aac9087bbe7964",
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": [
+        {
+          "name": "COMMENTKEYWORD_API_TOKEN",
+          "description": "CommentKeyword API token. Create one at https://commentkeyword.com/settings?tab=api with keywords:read, keywords:write and agents:read.",
+          "isRequired": true,
+          "isSecret": true,
+          "format": "string"
+        },
+        {
+          "name": "COMMENTKEYWORD_API_URL",
+          "description": "Optional API base URL. Defaults to https://commentkeyword.com/api.",
+          "isRequired": false,
+          "isSecret": false,
+          "format": "string"
+        }
+      ]
+    }
+  ]
+}

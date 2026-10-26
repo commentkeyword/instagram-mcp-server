@@ -1,0 +1,8 @@
+# The MCPB bundle ships only what the server needs at runtime.
+# Allowlist: ignore everything, then re-include these paths.
+# TODO: add a 512x512 PNG icon (icon.png), list it as "icon" in manifest.json and re-include it here.
+/*
+!/manifest.json
+!/server
+!/README.md
+!/LICENSE
