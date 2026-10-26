@@ -197,8 +197,6 @@ def build_create_body(args) -> tuple[Optional[dict], Optional[str]]:
             return None, f"a public reply can render to more than {REPLY_MAX} characters: {r[:40]}..."
     if args.target == "specific_posts" and not args.media_id:
         return None, "--target specific_posts needs at least one --media-id"
-    if args.delay is not None and not 1 <= args.delay <= 60:
-        return None, "--delay must be between 1 and 60 seconds"
 
     body: dict = {"keyword": keyword, "dmMessages": dms, **target_fields(args.target, args.media_id or [])}
     if replies:
@@ -209,8 +207,6 @@ def build_create_body(args) -> tuple[Optional[dict], Optional[str]]:
         body["matchWithoutAccents"] = True
     if args.track_links:
         body["trackLinks"] = True
-    if args.delay is not None:
-        body["delaySec"] = args.delay
     if args.paused:
         body["isActive"] = False
     return body, None
@@ -407,7 +403,6 @@ def main():
     parser.add_argument("--exact", action="store_true", help="Match only when the whole comment is the keyword")
     parser.add_argument("--without-accents", action="store_true", help="Also match the keyword without accents (e.g. guia for GUÍA)")
     parser.add_argument("--track-links", action="store_true", help="Count clicks on links in the DM")
-    parser.add_argument("--delay", type=int, help="Seconds before the DM is sent, 1-60 (default 30)")
     parser.add_argument("--paused", action="store_true", help="Create it paused (does not use an active-keyword slot)")
     parser.add_argument("--search", help="With --list: filter by keyword text")
     parser.add_argument("--dry-run", action="store_true", help="Check the token and show the request; change nothing")

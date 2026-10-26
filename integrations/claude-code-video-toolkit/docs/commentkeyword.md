@@ -77,7 +77,6 @@ uv run tools/commentkeyword.py --list --search guide --json-out
 | `--exact` | Match only when the whole comment is the keyword (default: whole word anywhere in the comment) |
 | `--without-accents` | Also match without accents, e.g. "guia" for GUÍA |
 | `--track-links` | Count clicks on links in the DM |
-| `--delay` | Seconds before the DM is sent, 1-60 (default 30) |
 | `--paused` | Create it paused; it doesn't use an active-keyword slot |
 | `--rearm ID` | Make an existing automation wait for the next post again |
 | `--status ID` / `--pause ID` / `--list` | Inspect, pause, list |
