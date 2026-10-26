@@ -51,7 +51,7 @@ Claude Code asks for your API token when the plugin is enabled. It stores the to
 ### Claude Code (MCP server only)
 
 ```bash
-claude mcp add --transport stdio --env COMMENTKEYWORD_API_TOKEN=YOUR_TOKEN commentkeyword -- npx -y github:commentkeyword/agent-toolkit
+claude mcp add --transport stdio --env COMMENTKEYWORD_API_TOKEN=YOUR_TOKEN commentkeyword -- npx -y github:commentkeyword/agent-toolkit#v0.2.0
 ```
 
 ### Claude Desktop, Cursor, Windsurf and other MCP clients

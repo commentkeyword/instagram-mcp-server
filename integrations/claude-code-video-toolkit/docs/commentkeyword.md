@@ -121,7 +121,7 @@ The same operations are available as MCP tools (`create_keyword`, `update_keywor
 [commentkeyword/agent-toolkit](https://github.com/commentkeyword/agent-toolkit):
 
 ```bash
-claude mcp add --transport stdio --env COMMENTKEYWORD_API_TOKEN=YOUR_TOKEN commentkeyword -- npx -y github:commentkeyword/agent-toolkit
+claude mcp add --transport stdio --env COMMENTKEYWORD_API_TOKEN=YOUR_TOKEN commentkeyword -- npx -y github:commentkeyword/agent-toolkit#v0.2.0
 ```
 
 `/comment-dm` works with either.
