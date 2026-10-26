@@ -75,6 +75,12 @@ Add the server to the client's MCP config. For Claude Desktop that file is `clau
 
 Without the MCP server, the skill still plans the CTA and the DM. It can also call the REST API directly where the agent has network access (see [`references/api.md`](skills/comment-to-dm-cta/references/api.md)).
 
+### Add-ons for video toolkits
+
+| Toolkit | Add-on |
+|---|---|
+| [claude-code-video-toolkit](https://github.com/digitalsamba/claude-code-video-toolkit) | [`integrations/claude-code-video-toolkit`](integrations/claude-code-video-toolkit): a `/comment-dm` command that reads the CTA from the project and arms the DM before you publish |
+
 ## MCP tools
 
 | Tool | What it does |
