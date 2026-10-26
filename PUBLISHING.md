@@ -104,20 +104,13 @@ curl -s "https://registry.modelcontextprotocol.io/v0/servers?search=com.commentk
 Keep `MCP_REGISTRY_AUTH` set: the next version's login needs it. To rotate the key, generate a new
 pair, replace the variable, and log in with the new private key.
 
-## 5. Smithery
+## 5. Smithery (not used)
 
-Needs Node 20+ and a `commentkeyword` namespace on smithery.ai (create it on the website first).
-
-```bash
-npx -y smithery@1.2.0 auth login
-npx -y smithery@1.2.0 mcp publish release/commentkeyword-mcp-0.2.0.mcpb -n commentkeyword/commentkeyword
-```
-
-Finish any remaining steps the CLI links to on smithery.ai. Smithery reads the token setting from
-`user_config` in `manifest.json`.
+Smithery shut down its accounts, API, CLI and hosted proxy on 2026-10-31. smithery.ai continues as a
+curated directory that lists vendors' remote MCP URLs, so there is nothing to publish there for a
+local stdio server. Revisit if CommentKeyword ships a hosted remote MCP server.
 
 ## Docs
 
 - MCP Registry: [quickstart](https://github.com/modelcontextprotocol/registry/blob/main/docs/modelcontextprotocol-io/quickstart.mdx), [authentication](https://github.com/modelcontextprotocol/registry/blob/main/docs/modelcontextprotocol-io/authentication.mdx), [package types (MCPB)](https://github.com/modelcontextprotocol/registry/blob/main/docs/modelcontextprotocol-io/package-types.mdx)
 - [MCPB manifest spec](https://github.com/modelcontextprotocol/mcpb/blob/main/MANIFEST.md) and [CLI](https://github.com/modelcontextprotocol/mcpb/blob/main/CLI.md)
-- [Smithery: publish](https://smithery.ai/docs/build/publish) and [CLI](https://smithery.ai/docs/concepts/cli)
