@@ -117,10 +117,10 @@ Create requests are never retried automatically, so an unclear failure never cre
 
 The same operations are available as MCP tools (`create_keyword`, `update_keyword`,
 `list_keywords`, `get_keyword`, `delete_keyword`, `list_agents`) from
-[commentkeyword/agent-toolkit](https://github.com/commentkeyword/agent-toolkit):
+[commentkeyword/instagram-mcp-server](https://github.com/commentkeyword/instagram-mcp-server):
 
 ```bash
-claude mcp add --transport stdio --env COMMENTKEYWORD_API_TOKEN=YOUR_TOKEN commentkeyword -- npx -y github:commentkeyword/agent-toolkit#v0.2.0
+claude mcp add --transport stdio --env COMMENTKEYWORD_API_TOKEN=YOUR_TOKEN commentkeyword -- npx -y github:commentkeyword/instagram-mcp-server#v0.2.0
 ```
 
 `/comment-dm` works with either.

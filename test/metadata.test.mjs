@@ -40,7 +40,7 @@ test('server.json points at this version\'s GitHub release asset', () => {
   assert.equal(bundle.registryType, 'mcpb');
   assert.equal(
     bundle.identifier,
-    `https://github.com/commentkeyword/agent-toolkit/releases/download/v${SERVER_VERSION}/${bundleName}`,
+    `https://github.com/commentkeyword/instagram-mcp-server/releases/download/v${SERVER_VERSION}/${bundleName}`,
   );
   assert.match(bundle.fileSha256, /^[a-f0-9]{64}$/);
   const token = bundle.environmentVariables.find((v) => v.name === 'COMMENTKEYWORD_API_TOKEN');

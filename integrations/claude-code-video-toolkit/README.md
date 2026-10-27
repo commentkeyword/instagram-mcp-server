@@ -15,7 +15,7 @@ Run it before `/publish-social` or before posting from the Instagram app.
 From the root of your toolkit checkout:
 
 ```bash
-git clone --depth 1 https://github.com/commentkeyword/agent-toolkit.git /tmp/ck-addon
+git clone --depth 1 https://github.com/commentkeyword/instagram-mcp-server.git /tmp/ck-addon
 cp /tmp/ck-addon/integrations/claude-code-video-toolkit/tools/commentkeyword.py tools/
 cp /tmp/ck-addon/integrations/claude-code-video-toolkit/docs/commentkeyword.md docs/
 cp /tmp/ck-addon/integrations/claude-code-video-toolkit/.claude/commands/comment-dm.md .claude/commands/

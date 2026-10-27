@@ -50,7 +50,7 @@ gh release create v0.2.0 release/commentkeyword-mcp-0.2.0.mcpb --verify-tag \
 Check the uploaded file:
 
 ```bash
-curl -sL https://github.com/commentkeyword/agent-toolkit/releases/download/v0.2.0/commentkeyword-mcp-0.2.0.mcpb | openssl dgst -sha256
+curl -sL https://github.com/commentkeyword/instagram-mcp-server/releases/download/v0.2.0/commentkeyword-mcp-0.2.0.mcpb | openssl dgst -sha256
 ```
 
 ## 3. Prove commentkeyword.com to the MCP Registry (once)

@@ -12,11 +12,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/commentkeyword/agent-toolkit.git"
+    "url": "https://github.com/commentkeyword/instagram-mcp-server.git"
   },
   "homepage": "https://commentkeyword.com/instagram-mcp-server",
-  "documentation": "https://github.com/commentkeyword/agent-toolkit#readme",
-  "support": "https://github.com/commentkeyword/agent-toolkit/issues",
+  "documentation": "https://github.com/commentkeyword/instagram-mcp-server#readme",
+  "support": "https://github.com/commentkeyword/instagram-mcp-server/issues",
   "server": {
     "type": "node",
     "entry_point": "server/commentkeyword-mcp.mjs",

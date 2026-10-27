@@ -5,14 +5,14 @@
   "description": "Create and manage Instagram comment-to-DM keyword automations in CommentKeyword.",
   "websiteUrl": "https://commentkeyword.com/instagram-mcp-server",
   "repository": {
-    "url": "https://github.com/commentkeyword/agent-toolkit",
+    "url": "https://github.com/commentkeyword/instagram-mcp-server",
     "source": "github"
   },
   "version": "0.2.0",
   "packages": [
     {
       "registryType": "mcpb",
-      "identifier": "https://github.com/commentkeyword/agent-toolkit/releases/download/v0.2.0/commentkeyword-mcp-0.2.0.mcpb",
+      "identifier": "https://github.com/commentkeyword/instagram-mcp-server/releases/download/v0.2.0/commentkeyword-mcp-0.2.0.mcpb",
       "version": "0.2.0",
       "fileSha256": "9473133d43ce3820abf92c499a6a0178cff36c6b27904025ba2f9caa640babd3",
       "transport": {
