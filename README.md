@@ -91,6 +91,10 @@ Without the MCP server, the skill still plans the CTA and the DM. It can also ca
 |---|---|
 | [claude-code-video-toolkit](https://github.com/digitalsamba/claude-code-video-toolkit) | [`integrations/claude-code-video-toolkit`](integrations/claude-code-video-toolkit): a `/comment-dm` command that reads the CTA from the project and arms the DM before you publish |
 
+### n8n
+
+[`integrations/n8n`](integrations/n8n) has an importable n8n workflow that creates the comment-to-DM automation for your next post through the REST API, with Header Auth and no code.
+
 ## MCP tools
 
 | Tool | What it does |
