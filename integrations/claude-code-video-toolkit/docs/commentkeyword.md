@@ -77,8 +77,8 @@ uv run tools/commentkeyword.py --list --search guide --json-out
 | `--exact` | Match only when the whole comment is the keyword (default: whole word anywhere in the comment) |
 | `--without-accents` | Also match without accents, e.g. "guia" for GUÍA |
 | `--track-links` | Count clicks on links in the DM |
-| `--paused` | Create it paused; it doesn't use an active-keyword slot |
-| `--rearm ID` | Make an existing automation wait for the next post again |
+| `--paused` | Create or re-arm it paused; it doesn't use an active-keyword slot |
+| `--rearm ID` | Make an existing automation wait for the next post again, and resume it if it was paused (add `--paused` to keep it paused) |
 | `--status ID` / `--pause ID` / `--list` | Inspect, pause, list |
 | `--dry-run` | Check the token and print the request; change nothing |
 | `--json-out` | One machine-readable JSON line on stdout |

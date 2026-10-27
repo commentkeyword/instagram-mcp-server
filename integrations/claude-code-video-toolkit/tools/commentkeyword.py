@@ -65,6 +65,13 @@ except ImportError as e:
 
 load_dotenv()
 
+# On Windows a piped stderr is cp1252, which can't encode emoji in DM text. Replace what the
+# console can't show instead of crashing; --json-out output is ASCII-escaped (see emit_json).
+try:
+    sys.stderr.reconfigure(errors="replace")
+except (AttributeError, ValueError):
+    pass
+
 DEFAULT_API_URL = "https://commentkeyword.com/api"
 TOKEN_PLACEHOLDERS = {"", "your_token_here"}
 API_TIMEOUT = (15, 60)
@@ -248,7 +255,7 @@ def same_word(token: str, keyword: str) -> list[dict]:
 # Output
 # ---------------------------------------------------------------------------
 def emit_json(payload: dict):
-    print(json.dumps(payload, ensure_ascii=False))
+    print(json.dumps(payload, ensure_ascii=True))
 
 
 def fail(msg: str, error_type: str, json_out: bool, **extra):
@@ -315,7 +322,8 @@ def cmd_create(args, token: str):
 
 
 def cmd_rearm(args, token: str):
-    body = {"scope": "post_specific", "includeNextPost": True}
+    # Re-arming a paused automation also resumes it, unless --paused is given.
+    body = {"scope": "post_specific", "includeNextPost": True, "isActive": not args.paused}
     if args.dry_run:
         try:
             k = summarize(request("GET", f"/keywords/{args.rearm}", token).get("data", {}))
@@ -331,6 +339,8 @@ def cmd_rearm(args, token: str):
     except ApiError as e:
         fail_api(e, args.json_out)
     print_keyword(k)
+    if not k["isActive"] and not args.paused:
+        log("The automation is still paused, so it won't send DMs. Resume it in the dashboard.", "warn")
     if args.json_out:
         emit_json({"success": True, **k})
 
@@ -388,7 +398,7 @@ def main():
     )
     mode = parser.add_mutually_exclusive_group()
     mode.add_argument("--keyword", help="Create an automation for this keyword (one word works best)")
-    mode.add_argument("--rearm", metavar="PUBLIC_ID", help="Make an existing automation wait for the next post again")
+    mode.add_argument("--rearm", metavar="PUBLIC_ID", help="Make an existing automation wait for the next post again (resumes it if paused)")
     mode.add_argument("--status", metavar="PUBLIC_ID", help="Show an automation, including whether the next post was caught")
     mode.add_argument("--pause", metavar="PUBLIC_ID", help="Pause an automation")
     mode.add_argument("--list", action="store_true", help="List automations")
@@ -403,7 +413,7 @@ def main():
     parser.add_argument("--exact", action="store_true", help="Match only when the whole comment is the keyword")
     parser.add_argument("--without-accents", action="store_true", help="Also match the keyword without accents (e.g. guia for GUÍA)")
     parser.add_argument("--track-links", action="store_true", help="Count clicks on links in the DM")
-    parser.add_argument("--paused", action="store_true", help="Create it paused (does not use an active-keyword slot)")
+    parser.add_argument("--paused", action="store_true", help="Create or re-arm it paused (does not use an active-keyword slot)")
     parser.add_argument("--search", help="With --list: filter by keyword text")
     parser.add_argument("--dry-run", action="store_true", help="Check the token and show the request; change nothing")
     parser.add_argument("--json-out", action="store_true", help="Emit a single machine-readable JSON line to stdout")
