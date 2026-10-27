@@ -1,5 +1,7 @@
 # Instagram MCP Server (Comment-to-DM)
 
+![Instagram MCP Server: comment-to-DM automations from Claude, on Meta's official Instagram API](docs/images/cover.png)
+
 An open-source **Instagram MCP server** that lets Claude, Cursor, Codex and other AI agents set up **Instagram comment-to-DM automations** ("Comment GUIDE and I'll DM you the link") through Meta's official Instagram API. If you were looking for a **ManyChat MCP** to build comment automations from Claude, this is the alternative that does it: ManyChat's API can't create keyword or comment triggers, so no ManyChat MCP server can either.
 
 Made by [CommentKeyword](https://commentkeyword.com). MIT-licensed. Registry name `com.commentkeyword/mcp`.
