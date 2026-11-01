@@ -12,7 +12,7 @@ Made by [CommentKeyword](https://commentkeyword.com). MIT-licensed. Registry nam
 | **How it reaches Instagram** | Meta's official Instagram API (professional accounts). No password, no session cookies, no scraping |
 | **Clients** | Claude Code, Claude Desktop, Cursor, Windsurf, Codex and any MCP client that runs a local stdio server |
 | **Runs** | Locally with `npx` (Node 18+), no dependencies, no build step. A remote server for claude.ai and ChatGPT is planned |
-| **Also in this repo** | An [Agent Skill](skills/comment-to-dm-cta/SKILL.md) that plans the "comment X" CTA of a Reel, a Claude Code plugin, an [n8n template](integrations/n8n) and a [video-toolkit add-on](integrations/claude-code-video-toolkit) |
+| **Also in this repo** | An [Agent Skill](skills/comment-to-dm-cta/SKILL.md) that plans the "comment X" CTA of a Reel, a Claude Code plugin, a [Remotion comment-to-DM CTA](integrations/remotion) for the end of a Reel, an [n8n template](integrations/n8n) and a [video-toolkit add-on](integrations/claude-code-video-toolkit) |
 | **Price** | The MCP server and the REST API are included on every CommentKeyword plan, Free too (300 automated DMs a month, 3 active keywords) |
 
 ## What it looks like
@@ -117,6 +117,7 @@ Without the MCP server, the skill still plans the CTA and the DM. It can also ca
 
 | Toolkit | Add-on |
 |---|---|
+| [Remotion](https://www.remotion.dev) | [`integrations/remotion`](integrations/remotion): an animated "comment the keyword, get the DM" box for the end of a Reel. It shows your real public reply, DM, handle and profile picture, read from your automation |
 | [claude-code-video-toolkit](https://github.com/digitalsamba/claude-code-video-toolkit) | [`integrations/claude-code-video-toolkit`](integrations/claude-code-video-toolkit): a `/comment-dm` command that reads the CTA from the project and arms the DM before you publish |
 
 ### n8n
