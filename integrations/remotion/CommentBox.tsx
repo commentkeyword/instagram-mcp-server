@@ -13,6 +13,7 @@
 // Sizes are designed for a 1080-wide frame and scale with the composition width.
 // Depends only on `remotion`. No fonts are loaded here: pass fontFamily (see README).
 // Get keyword, reply, DM, handle and avatar from your CommentKeyword automation with commentkeyword.mjs.
+// AI agents adding this box for a user: read "For AI agents" in README.md first (who sends the DM, where the props come from).
 
 import React from "react";
 import { Easing, Img, interpolate, useCurrentFrame, useVideoConfig } from "remotion";
