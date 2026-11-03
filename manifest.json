@@ -56,6 +56,14 @@
       "description": "List the AI agents set up in the dashboard, to attach one to a keyword."
     },
     {
+      "name": "get_keyword_stats",
+      "description": "Results of one keyword for a date range: DMs triggered, sent, held and failed, replies, AI conversations, goals and link clicks."
+    },
+    {
+      "name": "get_stats_overview",
+      "description": "Workspace totals for a date range and the keywords that sent the most DMs."
+    },
+    {
       "name": "get_usage",
       "description": "Plan, DMs used this month, active keywords, and anything stopping DMs (Free quota used, failed payment, Instagram to reconnect)."
     }

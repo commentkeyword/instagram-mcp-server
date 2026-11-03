@@ -71,6 +71,13 @@ before(async () => {
           meta: { authType: 'pat', workspaceId: 1 },
         }));
       }
+      if (req.method === 'GET' && req.url.startsWith('/api/stats')) {
+        return res.end(JSON.stringify({ data: {
+          range: { from: '2026-10-01T00:00:00.000Z', to: '2026-10-31T23:59:59.999Z' },
+          results: { dmsTriggered: 12, dmsSent: 10, dmsHeld: 2, dmsFailed: 0, publicReplies: 9, repliesReceived: 4, aiConversationsStarted: 0, goalsReached: 0, linkClicks: 6 },
+          topKeywords: [{ publicId: KEYWORD_ID, keyword: 'GUIDE', isActive: true, dmsSent: 10 }],
+        } }));
+      }
       if (req.method === 'GET' && req.url === '/api/usage') {
         return res.end(JSON.stringify({ data: {
           plan: 'Free', dms: { used: 300, included: 300 }, activeKeywords: { used: 3, limit: 3 },
@@ -123,7 +130,7 @@ test('initialize negotiates the protocol and advertises tools', async () => {
 
 test('lists the tools with annotations', async () => {
   const { result } = await client.request('tools/list');
-  assert.deepEqual(result.tools.map((t) => t.name).sort(), ['create_keyword', 'delete_keyword', 'get_keyword', 'get_usage', 'list_agents', 'list_keywords', 'update_keyword']);
+  assert.deepEqual(result.tools.map((t) => t.name).sort(), ['create_keyword', 'delete_keyword', 'get_keyword', 'get_keyword_stats', 'get_stats_overview', 'get_usage', 'list_agents', 'list_keywords', 'update_keyword']);
   const byName = Object.fromEntries(result.tools.map((t) => [t.name, t]));
   assert.equal(byName.delete_keyword.annotations.destructiveHint, true);
   assert.equal(byName.update_keyword.annotations.destructiveHint, true);
@@ -199,6 +206,12 @@ test('get_usage summarises the plan and what blocks DMs', async () => {
   assert.match(result.content[0].text, /Heads-up: All 3 active keyword slots/);
 });
 
+test('get_stats_overview passes the range and summarises the results', async () => {
+  const result = await client.call('get_stats_overview', { from: '2026-10-01', to: '2026-10-31' });
+  assert.equal(requests.at(-1).url, '/api/stats?from=2026-10-01&to=2026-10-31');
+  assert.match(result.content[0].text, /DMs: 10 sent of 12 triggered, 2 held\. .*Link clicks: 6\. Top keywords by DMs sent: "GUIDE" \(10\)\./);
+});
+
 test('TOOL_SCOPES covers every tool', async () => {
   const { TOOL_SCOPES } = await import('../server/core.mjs');
   assert.deepEqual(Object.keys(TOOL_SCOPES).sort(), TOOLS.map((t) => t.name).sort());
@@ -211,7 +224,7 @@ test('unknown tools get a JSON-RPC error', async () => {
 
 test('starts without a token and reports it on tool calls', async () => {
   const { result } = await noToken.request('tools/list');
-  assert.equal(result.tools.length, 7);
+  assert.equal(result.tools.length, 9);
   const call = await noToken.call('list_keywords', {});
   assert.equal(call.isError, true);
   assert.match(call.content[0].text, /COMMENTKEYWORD_API_TOKEN is not set/);
@@ -225,6 +238,8 @@ test('validator accepts every tool with only its required fields', () => {
     update_keyword: { id: KEYWORD_ID },
     delete_keyword: { id: KEYWORD_ID },
     list_agents: {},
+    get_keyword_stats: { id: KEYWORD_ID },
+    get_stats_overview: {},
     get_usage: {},
   };
   for (const tool of TOOLS) assert.deepEqual(validate(tool.inputSchema, samples[tool.name]), [], tool.name);

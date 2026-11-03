@@ -78,6 +78,8 @@ export function createClient({ token, baseUrl = DEFAULT_BASE_URL, fetchImpl = fe
   return {
     listAgents: () => request('GET', '/agents'),
     getUsage: () => request('GET', '/usage'),
+    getKeywordStats: (keywordId, query) => request('GET', `/keywords/${id(keywordId)}/stats`, { query }),
+    getStatsOverview: (query) => request('GET', '/stats', { query }),
     listKeywords: (query) => request('GET', '/keywords', { query }),
     getKeyword: (keywordId) => request('GET', `/keywords/${id(keywordId)}`),
     createKeyword: (body) => request('POST', '/keywords', { body }),
@@ -161,6 +163,12 @@ const objectSchema = (properties, required = []) => ({
   additionalProperties: false,
 });
 
+const dateField = (description) => ({ type: 'string', format: 'date', description });
+const statsRange = {
+  from: dateField('First day (YYYY-MM-DD, UTC), included. Default: 30 days before to.'),
+  to: dateField('Last day (YYYY-MM-DD, UTC), included. Default: today. At most 366 days after from.'),
+};
+
 const { keyword: _keyword, dmMessages: _dm, ...optionalFields } = fields;
 
 export const TOOLS = [
@@ -225,6 +233,22 @@ export const TOOLS = [
     annotations: { readOnlyHint: true, openWorldHint: false },
   },
   {
+    name: 'get_keyword_stats',
+    title: 'Get the results of a keyword automation',
+    description:
+      'Results of one keyword automation for a date range (UTC days, default the last 30): DMs triggered by matching comments, sent, held (waiting for quota) and failed, public replies, replies received, AI conversations started, goals reached, and tracked link clicks (when trackLinks is on). Counts only, no commenter data.',
+    inputSchema: objectSchema({ id: uuid('The keyword publicId.'), ...statsRange }, ['id']),
+    annotations: { readOnlyHint: true, openWorldHint: false },
+  },
+  {
+    name: 'get_stats_overview',
+    title: 'Get workspace results',
+    description:
+      'Totals for all keyword automations in the workspace for a date range (UTC days, default the last 30), with the same counts as get_keyword_stats, plus the 5 keywords that sent the most DMs.',
+    inputSchema: objectSchema({ ...statsRange }),
+    annotations: { readOnlyHint: true, openWorldHint: false },
+  },
+  {
     name: 'get_usage',
     title: 'Get plan usage and account status',
     description:
@@ -242,6 +266,8 @@ export const TOOL_SCOPES = {
   update_keyword: ['keywords:write'],
   delete_keyword: ['keywords:delete'],
   list_agents: ['agents:read', 'keywords:read'],
+  get_keyword_stats: ['keywords:read'],
+  get_stats_overview: ['keywords:read'],
   get_usage: ['keywords:read', 'agents:read'],
 };
 
@@ -326,6 +352,30 @@ function summarizeKeyword(result) {
   return parts.join(' ');
 }
 
+function summarizeResults(results) {
+  if (!results) return '';
+  return [
+    `DMs: ${results.dmsSent} sent of ${results.dmsTriggered} triggered${results.dmsHeld ? `, ${results.dmsHeld} held` : ''}${results.dmsFailed ? `, ${results.dmsFailed} failed` : ''}.`,
+    `Public replies: ${results.publicReplies}. Replies received: ${results.repliesReceived}.`,
+    `AI conversations started: ${results.aiConversationsStarted}, goals reached: ${results.goalsReached}. Link clicks: ${results.linkClicks}.`,
+  ].join(' ');
+}
+
+const rangeLabel = (range) => (range ? `${String(range.from).slice(0, 10)} to ${String(range.to).slice(0, 10)}` : '');
+
+export function summarizeKeywordStats(result) {
+  const data = result?.data;
+  if (!data) return 'Done.';
+  return `Keyword "${data.keyword.keyword}", ${rangeLabel(data.range)} (UTC). ${summarizeResults(data.results)}`;
+}
+
+export function summarizeStatsOverview(result) {
+  const data = result?.data;
+  if (!data) return 'Done.';
+  const top = (data.topKeywords ?? []).map((row) => `"${row.keyword}" (${row.dmsSent})`).join(', ');
+  return `Workspace, ${rangeLabel(data.range)} (UTC). ${summarizeResults(data.results)}${top ? ` Top keywords by DMs sent: ${top}.` : ''}`;
+}
+
 export function summarizeUsage(result) {
   const usage = result?.data;
   if (!usage) return 'Done.';
@@ -367,6 +417,8 @@ export function createHandlers(client) {
     ],
     delete_keyword: ({ id, confirm }) => [client.deleteKeyword(id, confirm === true)],
     list_agents: () => [client.listAgents()],
+    get_keyword_stats: ({ id, ...range }) => [client.getKeywordStats(id, range), summarizeKeywordStats],
+    get_stats_overview: (range) => [client.getStatsOverview(range), summarizeStatsOverview],
     get_usage: () => [client.getUsage(), summarizeUsage],
   };
 }
