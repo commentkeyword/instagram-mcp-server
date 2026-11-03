@@ -133,6 +133,7 @@ Without the MCP server, the skill still plans the CTA and the DM. It can also ca
 | `list_keywords` / `get_keyword` | Check for conflicts and see whether the next post was caught (`nextPostStatus`). |
 | `delete_keyword` | Delete an automation. Asks for confirmation when an AI agent is attached. |
 | `list_agents` | List the AI agents already set up in your dashboard, so one can be attached to a keyword to continue the conversation after the first DM. Agents are created and edited in the dashboard, not through the API. |
+| `get_usage` | The plan, DMs used this month, active keywords, and anything stopping DMs from going out: Free quota used up, a failed payment, or Instagram to reconnect. Saving an active keyword also reports these. |
 
 | Environment variable | |
 |---|---|

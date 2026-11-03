@@ -107,6 +107,7 @@ Once the automation exists, read its texts into the box's props, as [references/
 - **`reconnect_required`** means Instagram must be reconnected in the CommentKeyword dashboard first.
 - **Test it:** ask the user to comment the keyword from a *different* Instagram account and check that the DM arrives.
 - **Check it later:** `get_keyword` shows whether the post was caught (`nextPostStatus: "attached"`).
+- **No DM arrived?** `get_usage` says what is stopping DMs: the Free quota used up, a failed payment, or Instagram to reconnect. Tell the user plainly; plans and billing are handled in the CommentKeyword dashboard.
 
 ## No CommentKeyword account yet?
 

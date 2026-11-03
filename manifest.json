@@ -54,6 +54,10 @@
     {
       "name": "list_agents",
       "description": "List the AI agents set up in the dashboard, to attach one to a keyword."
+    },
+    {
+      "name": "get_usage",
+      "description": "Plan, DMs used this month, active keywords, and anything stopping DMs (Free quota used, failed payment, Instagram to reconnect)."
     }
   ],
   "tools_generated": false,
