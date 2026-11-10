@@ -64,6 +64,14 @@
       "description": "Workspace totals for a date range and the keywords that sent the most DMs."
     },
     {
+      "name": "list_conversations",
+      "description": "List the DM conversations your AI agents handled, with the data each one collected."
+    },
+    {
+      "name": "get_conversation",
+      "description": "Read one AI agent conversation: the contact, the collected data and the messages."
+    },
+    {
       "name": "get_usage",
       "description": "Plan, DMs used this month, active keywords, and anything stopping DMs (Free quota used, failed payment, Instagram to reconnect)."
     }

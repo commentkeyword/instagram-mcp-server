@@ -10,6 +10,8 @@ import { validate, TOOLS } from '../server/core.mjs';
 
 const serverPath = fileURLToPath(new URL('../server/commentkeyword-mcp.mjs', import.meta.url));
 const KEYWORD_ID = '11111111-1111-4111-8111-111111111111';
+const AGENT_ID = '22222222-2222-4222-8222-222222222222';
+const CONVERSATION_ID = '33333333-3333-4333-8333-333333333333';
 const requests = [];
 // The last request other than the /usage check that follows saving an active keyword.
 const lastApiCall = () => requests.filter((r) => r.url !== '/api/usage').at(-1);
@@ -78,6 +80,20 @@ before(async () => {
           topKeywords: [{ publicId: KEYWORD_ID, keyword: 'GUIDE', isActive: true, dmsSent: 10 }],
         } }));
       }
+      if (req.method === 'GET' && req.url.startsWith('/api/conversations/')) {
+        return res.end(JSON.stringify({ data: {
+          id: CONVERSATION_ID, instagramUsername: 'ana', instagramUserId: '178', completed: true,
+          agent: { publicId: AGENT_ID, name: 'Lead catcher' }, collectedData: { email: 'ana@example.com' },
+          messages: [{ role: 'user', content: 'hi' }, { role: 'assistant', content: 'Hello!' }], messagesTruncated: false,
+        } }));
+      }
+      if (req.method === 'GET' && req.url.startsWith('/api/conversations')) {
+        return res.end(JSON.stringify({
+          data: [{ id: CONVERSATION_ID, completed: true, collectedData: { email: 'ana@example.com' } }],
+          meta: { stage: 'data_collected', from: '2026-10-01T00:00:00.000Z', to: '2026-10-31T23:59:59.999Z' },
+          pagination: { limit: 1, offset: 0, hasMore: true },
+        }));
+      }
       if (req.method === 'GET' && req.url === '/api/usage') {
         return res.end(JSON.stringify({ data: {
           plan: 'Free', dms: { used: 300, included: 300 }, activeKeywords: { used: 3, limit: 3 },
@@ -130,7 +146,7 @@ test('initialize negotiates the protocol and advertises tools', async () => {
 
 test('lists the tools with annotations', async () => {
   const { result } = await client.request('tools/list');
-  assert.deepEqual(result.tools.map((t) => t.name).sort(), ['create_keyword', 'delete_keyword', 'get_keyword', 'get_keyword_stats', 'get_stats_overview', 'get_usage', 'list_agents', 'list_keywords', 'update_keyword']);
+  assert.deepEqual(result.tools.map((t) => t.name).sort(), ['create_keyword', 'delete_keyword', 'get_conversation', 'get_keyword', 'get_keyword_stats', 'get_stats_overview', 'get_usage', 'list_agents', 'list_conversations', 'list_keywords', 'update_keyword']);
   const byName = Object.fromEntries(result.tools.map((t) => [t.name, t]));
   assert.equal(byName.delete_keyword.annotations.destructiveHint, true);
   assert.equal(byName.update_keyword.annotations.destructiveHint, true);
@@ -212,6 +228,19 @@ test('get_stats_overview passes the range and summarises the results', async () 
   assert.match(result.content[0].text, /DMs: 10 sent of 12 triggered, 2 held\. .*Link clicks: 6\. Top keywords by DMs sent: "GUIDE" \(10\)\./);
 });
 
+test('list_conversations passes the filters and says when there are more', async () => {
+  const result = await client.call('list_conversations', { stage: 'data_collected', agentId: AGENT_ID, from: '2026-10-01', to: '2026-10-31', limit: 1 });
+  assert.equal(result.isError, undefined);
+  assert.equal(requests.at(-1).url, `/api/conversations?stage=data_collected&agentId=${AGENT_ID}&from=2026-10-01&to=2026-10-31&limit=1`);
+  assert.match(result.content[0].text, /^1 conversation with collected data, 2026-10-01 to 2026-10-31 \(UTC\)\. More available: call again with offset 1\./);
+});
+
+test('get_conversation summarises the contact, the agent and the transcript', async () => {
+  const result = await client.call('get_conversation', { id: CONVERSATION_ID });
+  assert.equal(requests.at(-1).url, `/api/conversations/${CONVERSATION_ID}`);
+  assert.match(result.content[0].text, /^Conversation @ana with agent "Lead catcher": objective completed, 2 messages\./);
+});
+
 test('TOOL_SCOPES covers every tool', async () => {
   const { TOOL_SCOPES } = await import('../server/core.mjs');
   assert.deepEqual(Object.keys(TOOL_SCOPES).sort(), TOOLS.map((t) => t.name).sort());
@@ -224,7 +253,7 @@ test('unknown tools get a JSON-RPC error', async () => {
 
 test('starts without a token and reports it on tool calls', async () => {
   const { result } = await noToken.request('tools/list');
-  assert.equal(result.tools.length, 9);
+  assert.equal(result.tools.length, 11);
   const call = await noToken.call('list_keywords', {});
   assert.equal(call.isError, true);
   assert.match(call.content[0].text, /COMMENTKEYWORD_API_TOKEN is not set/);
@@ -240,6 +269,8 @@ test('validator accepts every tool with only its required fields', () => {
     list_agents: {},
     get_keyword_stats: { id: KEYWORD_ID },
     get_stats_overview: {},
+    list_conversations: {},
+    get_conversation: { id: CONVERSATION_ID },
     get_usage: {},
   };
   for (const tool of TOOLS) assert.deepEqual(validate(tool.inputSchema, samples[tool.name]), [], tool.name);

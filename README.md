@@ -10,8 +10,8 @@ Made by [CommentKeyword](https://commentkeyword.com). MIT-licensed. Registry nam
 |---|---|
 | **What it does** | Creates, re-targets, pauses and deletes Instagram comment-to-DM keyword automations: keyword, public reply, DM, link tracking, optional AI follow-up |
 | **How it reaches Instagram** | Meta's official Instagram API (professional accounts). No password, no session cookies, no scraping |
-| **Clients** | Claude Code, Claude Desktop, Cursor, Windsurf, Codex and any MCP client that runs a local stdio server |
-| **Runs** | Locally with `npx` (Node 18+), no dependencies, no build step. A remote server for claude.ai and ChatGPT is planned |
+| **Clients** | Claude (claude.ai, desktop, Cowork, mobile), Claude Code, ChatGPT, Codex, Cursor, Windsurf and any MCP client |
+| **Runs** | Hosted at `https://commentkeyword.com/connect/mcp` (sign in with CommentKeyword, no token), or locally with `npx` (Node 18+, no dependencies, no build step) |
 | **Also in this repo** | An [Agent Skill](skills/comment-to-dm-cta/SKILL.md) that plans the "comment X" CTA of a Reel, a Claude Code plugin, a [Remotion comment-to-DM CTA](integrations/remotion) for the end of a Reel, an [n8n template](integrations/n8n) and a [video-toolkit add-on](integrations/claude-code-video-toolkit) |
 | **Price** | The MCP server and the REST API are included on every CommentKeyword plan, Free too (300 automated DMs a month, 3 active keywords) |
 
@@ -57,13 +57,25 @@ ManyChat is still the better tool if you need WhatsApp, Messenger, TikTok or ema
 
 ## Instagram MCP servers: how this one differs
 
-Meta has no official MCP server for organic Instagram (its official MCP covers ads), so every Instagram MCP server is third-party. Many log in with your password or a session cookie, or scrape public pages. This one only talks to the CommentKeyword API, which uses Meta's official Instagram login and permissions, and it does one job well: comment-to-DM. It doesn't publish posts, read analytics or read your inbox; pair it with a scheduler or an analytics connector for those. Comparison: [Instagram MCP servers compared](https://commentkeyword.com/instagram-mcp-servers-compared).
+Meta has no official MCP server for organic Instagram (its official MCP covers ads), so every Instagram MCP server is third-party. Many log in with your password or a session cookie, or scrape public pages. This one only talks to the CommentKeyword API, which uses Meta's official Instagram login and permissions, and it does one job well: comment-to-DM. It doesn't publish posts, read Instagram insights or read your inbox (only the conversations your CommentKeyword AI agents handled); pair it with a scheduler or an analytics connector for those. Comparison: [Instagram MCP servers compared](https://commentkeyword.com/instagram-mcp-servers-compared).
+
+## Connect by URL (no token, no Node.js)
+
+The hosted server at `https://commentkeyword.com/connect/mcp` has the same tools. Your app signs in with CommentKeyword (OAuth) and you approve what it may do; disconnect it any time in Settings → API & MCP.
+
+- **Claude** (claude.ai, desktop app, Cowork, mobile): [Customize → Connectors](https://claude.ai/customize/connectors) → + → add a custom connector, paste the URL, keep the detected options (sign in now, Claude's published identity), then sign in. On Team and Enterprise an owner adds it under Organization settings → Connectors.
+- **Claude Code**: `claude mcp add --transport http --scope user commentkeyword https://commentkeyword.com/connect/mcp`, then `/mcp` → commentkeyword → sign in.
+- **Codex** (CLI, IDE extension and app): `codex mcp add commentkeyword --url https://commentkeyword.com/connect/mcp` opens the sign-in; if it doesn't, run `codex mcp login commentkeyword`.
+- **ChatGPT**: [chatgpt.com/plugins](https://chatgpt.com/plugins) → + → Add custom MCP server, paste the URL, keep OAuth, then sign in (depends on your plan and workspace settings).
+- **Cursor**: `{ "mcpServers": { "commentkeyword": { "url": "https://commentkeyword.com/connect/mcp" } } }` in `~/.cursor/mcp.json`, then sign in when Cursor asks.
+
+The rest of this README covers the local server, which uses an API token, and the Claude Code plugin, which also installs the Agent Skill.
 
 ## Before you start
 
 1. Create a CommentKeyword account at https://commentkeyword.com. API access is included on every plan, including Free.
 2. Connect an Instagram professional account (Business or Creator).
-3. Create an API token under **Settings → API** (https://commentkeyword.com/settings?tab=api). Give it `keywords:read`, `keywords:write` and `agents:read`. Add `keywords:delete` only if you want the agent to be able to delete automations.
+3. Create an API token under **Settings → API** (https://commentkeyword.com/settings?tab=api). Give it `keywords:read`, `keywords:write` and `agents:read`. Add `keywords:delete` only if you want the agent to be able to delete automations, and `conversations:read` if it should read your AI agents' conversations.
 
 ## Install
 
@@ -134,6 +146,7 @@ Without the MCP server, the skill still plans the CTA and the DM. It can also ca
 | `delete_keyword` | Delete an automation. Asks for confirmation when an AI agent is attached. |
 | `list_agents` | List the AI agents already set up in your dashboard, so one can be attached to a keyword to continue the conversation after the first DM. Agents are created and edited in the dashboard, not through the API. |
 | `get_keyword_stats` / `get_stats_overview` | Results for one keyword or the whole workspace over a date range: DMs triggered, sent, held and failed, public replies, replies received, AI conversations, goals reached and tracked link clicks. Counts only. |
+| `list_conversations` / `get_conversation` | The DM conversations your AI agents handled, with the data each one collected (such as a lead's email), and one conversation's messages. Needs `conversations:read`. |
 | `get_usage` | The plan, DMs used this month, active keywords, and anything stopping DMs from going out: Free quota used up, a failed payment, or Instagram to reconnect. Saving an active keyword also reports these. |
 
 | Environment variable | |
@@ -173,7 +186,7 @@ The MCP server has no dependencies and no build step. It is two readable files i
 
 **Is it allowed by Meta?** It uses Meta's official Instagram API with permissions you approve, and messages only people who commented your keyword. See [Is Instagram DM automation allowed?](https://commentkeyword.com/is-instagram-dm-automation-allowed).
 
-**Does it work with ChatGPT or claude.ai in the browser?** Not yet: those need a remote MCP server, which is planned. Codex, Claude Code, Claude Desktop, Cursor and Windsurf work today.
+**Does it work with ChatGPT or claude.ai in the browser?** Yes, through the hosted server at `https://commentkeyword.com/connect/mcp`: see [Connect by URL](#connect-by-url-no-token-no-nodejs).
 
 **What does it cost?** The server is free and open source. The CommentKeyword service has a Free plan that includes the API; paid plans add DMs, keywords and AI agents. [Pricing](https://commentkeyword.com/pricing).
 
