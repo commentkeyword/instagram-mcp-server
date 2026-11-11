@@ -5,7 +5,7 @@
   "display_name": "CommentKeyword",
   "version": "0.3.0",
   "description": "Create and manage Instagram comment-to-DM keyword automations in CommentKeyword.",
-  "long_description": "Set up an Instagram \"Comment GUIDE and I'll DM you the link\" automation from your AI agent. The server creates, re-targets, pauses and deletes keyword automations through the CommentKeyword API, and can attach an AI agent you already set up in the dashboard.\n\nYou need a CommentKeyword account (the Free plan works) with an Instagram professional account connected, and an API token from Settings → API (https://commentkeyword.com/settings?tab=api) with `keywords:read`, `keywords:write` and `agents:read`. Add `keywords:delete` only if you want the agent to be able to delete automations.\n\nThe server only talks to https://commentkeyword.com/api and stores nothing on disk. Every automation messages real people, so the tools tell the agent to confirm the keyword, the DM and the target with you first.",
+  "long_description": "Set up an Instagram \"Comment GUIDE and I'll DM you the link\" automation from your AI agent. The server creates, re-targets, pauses and deletes keyword automations through the CommentKeyword API, and can attach an AI agent you already set up in the dashboard.\n\nYou need a CommentKeyword account (the Free plan works) with an Instagram professional account connected, and an API token from Settings → API & MCP (https://commentkeyword.com/settings?tab=api) with `keywords:read`, `keywords:write` and `agents:read`. Add `keywords:delete` only if you want the agent to be able to delete automations.\n\nOptional: add `conversations:read` to let the agent read the DM conversations your AI agents handled, with the data they collected from each contact (such as an email) and the message transcripts. Without it, `list_conversations` and `get_conversation` return a permission error and everything else works.\n\nThe server only talks to https://commentkeyword.com/api and stores nothing on disk. Every automation messages real people, so the tools tell the agent to confirm the keyword, the DM and the target with you first.",
   "author": {
     "name": "CommentKeyword",
     "url": "https://commentkeyword.com"
@@ -105,7 +105,7 @@
     "api_token": {
       "type": "string",
       "title": "CommentKeyword API token",
-      "description": "Create one at https://commentkeyword.com/settings?tab=api with keywords:read, keywords:write and agents:read.",
+      "description": "Create one in Settings → API & MCP (https://commentkeyword.com/settings?tab=api) with keywords:read, keywords:write and agents:read. Optional: keywords:delete to delete automations, conversations:read to read your AI agents' conversations (collected contact data and transcripts).",
       "sensitive": true,
       "required": true
     }

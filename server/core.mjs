@@ -10,7 +10,7 @@ export const DEFAULT_BASE_URL = 'https://commentkeyword.com/api';
 const PROTOCOL_VERSIONS = ['2025-11-25', '2025-06-18', '2025-03-26', '2024-11-05'];
 
 export const MISSING_TOKEN =
-  'COMMENTKEYWORD_API_TOKEN is not set. Create a token in CommentKeyword (Settings → API, https://commentkeyword.com/settings?tab=api) and pass it to this server as an environment variable.';
+  'COMMENTKEYWORD_API_TOKEN is not set. Create a token in CommentKeyword (Settings → API & MCP, https://commentkeyword.com/settings?tab=api) and pass it to this server as an environment variable.';
 
 export const INSTRUCTIONS = `CommentKeyword sends an automatic Instagram DM to people who comment a keyword on a post or reel ("Comment GUIDE and I'll send you the link").
 Use these tools to create and manage those keyword automations.
@@ -31,7 +31,7 @@ export class ApiError extends Error {
     const code = body && typeof body.code === 'string' ? ` (${body.code})` : '';
     const hint =
       status === 401
-        ? ' Check COMMENTKEYWORD_API_TOKEN: create a token in CommentKeyword under Settings → API.'
+        ? ' Check COMMENTKEYWORD_API_TOKEN: create a token in CommentKeyword under Settings → API & MCP.'
         : status === 403
           ? ' The token is missing a permission for this action. Create a token with keywords:read, keywords:write and agents:read (add keywords:delete to delete, and conversations:read to read AI agent conversations).'
           : status === 409 && body && body.code === 'keyword_limit_exceeded'

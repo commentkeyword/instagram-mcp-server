@@ -14,7 +14,7 @@
       "registryType": "mcpb",
       "identifier": "https://github.com/commentkeyword/instagram-mcp-server/releases/download/v0.3.0/commentkeyword-mcp-0.3.0.mcpb",
       "version": "0.3.0",
-      "fileSha256": "20a4d5b9fdfc30c63504e0d494d1a494105d9a3b0ebc021c5569c59290fcc543",
+      "fileSha256": "2a6021863ecc6146fca56b41b15f6d857a6e85d5ca132f4dd4752ee68454c1f7",
       "transport": {
         "type": "stdio"
       },

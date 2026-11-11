@@ -36,7 +36,10 @@ doesn't match.
 The repository must be public: the registry checks that the asset URL answers before it accepts
 the entry.
 
+Tag the final commit once `main` points at it (the bundle in `release/` must be built from that commit):
+
 ```bash
+git tag -a v0.3.0 -m "v0.3.0"
 git push origin main
 git push origin v0.3.0
 gh release create v0.3.0 release/commentkeyword-mcp-0.3.0.mcpb --verify-tag \

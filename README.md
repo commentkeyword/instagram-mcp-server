@@ -10,7 +10,7 @@ Made by [CommentKeyword](https://commentkeyword.com). MIT-licensed. Registry nam
 |---|---|
 | **What it does** | Creates, re-targets, pauses and deletes Instagram comment-to-DM keyword automations: keyword, public reply, DM, link tracking, optional AI follow-up |
 | **How it reaches Instagram** | Meta's official Instagram API (professional accounts). No password, no session cookies, no scraping |
-| **Clients** | Claude (claude.ai, desktop, Cowork, mobile), Claude Code, ChatGPT, Codex, Cursor, Windsurf and any MCP client |
+| **Clients** | Claude (claude.ai, desktop, Cowork, mobile), Claude Code, ChatGPT, Codex, Cursor, Windsurf and other MCP clients that support remote OAuth or local stdio servers |
 | **Runs** | Hosted at `https://commentkeyword.com/connect/mcp` (sign in with CommentKeyword, no token), or locally with `npx` (Node 18+, no dependencies, no build step) |
 | **Also in this repo** | An [Agent Skill](skills/comment-to-dm-cta/SKILL.md) that plans the "comment X" CTA of a Reel, a Claude Code plugin, a [Remotion comment-to-DM CTA](integrations/remotion) for the end of a Reel, an [n8n template](integrations/n8n) and a [video-toolkit add-on](integrations/claude-code-video-toolkit) |
 | **Price** | The MCP server and the REST API are included on every CommentKeyword plan, Free too (300 automated DMs a month, 3 active keywords) |
@@ -75,7 +75,7 @@ The rest of this README covers the local server, which uses an API token, and th
 
 1. Create a CommentKeyword account at https://commentkeyword.com. API access is included on every plan, including Free.
 2. Connect an Instagram professional account (Business or Creator).
-3. Create an API token under **Settings → API** (https://commentkeyword.com/settings?tab=api). Give it `keywords:read`, `keywords:write` and `agents:read`. Add `keywords:delete` only if you want the agent to be able to delete automations, and `conversations:read` if it should read your AI agents' conversations.
+3. Create an API token under **Settings → API & MCP** (https://commentkeyword.com/settings?tab=api). Give it `keywords:read`, `keywords:write` and `agents:read`. Add `keywords:delete` only if you want the agent to be able to delete automations, and `conversations:read` if it should read your AI agents' conversations.
 
 ## Install
 
@@ -165,7 +165,7 @@ Without the MCP server, the skill still plans the CTA and the DM. It can also ca
 ## Safety
 
 - **Every automation messages real people.** The skill and the tool descriptions tell the agent to confirm the keyword, the DM and the target with you before creating or activating anything.
-- **Each token works for one workspace** and can be revoked at any time in Settings → API.
+- **Each token works for one workspace** and can be revoked at any time in Settings → API & MCP.
 - **Use the narrowest permissions you need.**
 
 ## Development
