@@ -5,7 +5,7 @@
 // The only host it talks to is COMMENTKEYWORD_API_URL (default https://commentkeyword.com/api).
 
 export const SERVER_NAME = 'commentkeyword';
-export const SERVER_VERSION = '0.2.0';
+export const SERVER_VERSION = '0.3.0';
 export const DEFAULT_BASE_URL = 'https://commentkeyword.com/api';
 const PROTOCOL_VERSIONS = ['2025-11-25', '2025-06-18', '2025-03-26', '2024-11-05'];
 

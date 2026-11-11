@@ -21,8 +21,8 @@ Bump the version in `package.json`, `manifest.json`, `server.json` (both `versio
 
 ```bash
 npx -y @anthropic-ai/mcpb@2.1.2 validate manifest.json
-npx -y @anthropic-ai/mcpb@2.1.2 pack . release/commentkeyword-mcp-0.2.0.mcpb
-openssl dgst -sha256 release/commentkeyword-mcp-0.2.0.mcpb
+npx -y @anthropic-ai/mcpb@2.1.2 pack . release/commentkeyword-mcp-0.3.0.mcpb
+openssl dgst -sha256 release/commentkeyword-mcp-0.3.0.mcpb
 ```
 
 Put the hash in `server.json` → `packages[0].fileSha256` and run `npm test`.
@@ -36,21 +36,17 @@ doesn't match.
 The repository must be public: the registry checks that the asset URL answers before it accepts
 the entry.
 
-The local `v0.2.0` tag was made before `manifest.json` and `server.json` existed. The server code
-is the same, but if you want the tagged source to include them, move the tag before its first
-push: `git tag -f v0.2.0 main`.
-
 ```bash
 git push origin main
-git push origin v0.2.0
-gh release create v0.2.0 release/commentkeyword-mcp-0.2.0.mcpb --verify-tag \
-  --title "v0.2.0" --notes "MCP server bundle (MCPB) for Claude Desktop and other MCP clients."
+git push origin v0.3.0
+gh release create v0.3.0 release/commentkeyword-mcp-0.3.0.mcpb --verify-tag \
+  --title "v0.3.0" --notes "MCP server bundle (MCPB) for Claude Desktop and other MCP clients."
 ```
 
 Check the uploaded file:
 
 ```bash
-curl -sL https://github.com/commentkeyword/instagram-mcp-server/releases/download/v0.2.0/commentkeyword-mcp-0.2.0.mcpb | openssl dgst -sha256
+curl -sL https://github.com/commentkeyword/instagram-mcp-server/releases/download/v0.3.0/commentkeyword-mcp-0.3.0.mcpb | openssl dgst -sha256
 ```
 
 ## 3. Prove commentkeyword.com to the MCP Registry (once)

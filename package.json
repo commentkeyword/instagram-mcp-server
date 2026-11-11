@@ -1,6 +1,6 @@
 {
   "name": "commentkeyword-mcp",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Instagram MCP server (comment-to-DM) and agent skill for CommentKeyword: set up Instagram comment-to-DM keyword automations from Claude and other AI agents through the official API. A ManyChat alternative for AI agents.",
   "license": "MIT",
   "author": "CommentKeyword (https://commentkeyword.com)",
