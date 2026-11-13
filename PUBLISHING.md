@@ -21,8 +21,8 @@ Bump the version in `package.json`, `manifest.json`, `server.json` (both `versio
 
 ```bash
 npx -y @anthropic-ai/mcpb@2.1.2 validate manifest.json
-npx -y @anthropic-ai/mcpb@2.1.2 pack . release/commentkeyword-mcp-0.3.0.mcpb
-openssl dgst -sha256 release/commentkeyword-mcp-0.3.0.mcpb
+npx -y @anthropic-ai/mcpb@2.1.2 pack . release/commentkeyword-mcp-0.3.1.mcpb
+openssl dgst -sha256 release/commentkeyword-mcp-0.3.1.mcpb
 ```
 
 Put the hash in `server.json` → `packages[0].fileSha256` and run `npm test`.
@@ -39,17 +39,17 @@ the entry.
 Tag the final commit once `main` points at it (the bundle in `release/` must be built from that commit):
 
 ```bash
-git tag -a v0.3.0 -m "v0.3.0"
+git tag -a v0.3.1 -m "v0.3.1"
 git push origin main
-git push origin v0.3.0
-gh release create v0.3.0 release/commentkeyword-mcp-0.3.0.mcpb --verify-tag \
-  --title "v0.3.0" --notes "MCP server bundle (MCPB) for Claude Desktop and other MCP clients."
+git push origin v0.3.1
+gh release create v0.3.1 release/commentkeyword-mcp-0.3.1.mcpb --verify-tag \
+  --title "v0.3.1" --notes "MCP server bundle (MCPB) for Claude Desktop and other MCP clients."
 ```
 
 Check the uploaded file:
 
 ```bash
-curl -sL https://github.com/commentkeyword/instagram-mcp-server/releases/download/v0.3.0/commentkeyword-mcp-0.3.0.mcpb | openssl dgst -sha256
+curl -sL https://github.com/commentkeyword/instagram-mcp-server/releases/download/v0.3.1/commentkeyword-mcp-0.3.1.mcpb | openssl dgst -sha256
 ```
 
 ## 3. Prove commentkeyword.com to the MCP Registry (once)

@@ -91,7 +91,7 @@ Claude Code asks for your API token when the plugin is enabled. It stores the to
 ### Claude Code (MCP server only)
 
 ```bash
-claude mcp add --transport stdio --env COMMENTKEYWORD_API_TOKEN=YOUR_TOKEN commentkeyword -- npx -y github:commentkeyword/instagram-mcp-server#v0.3.0
+claude mcp add --transport stdio --env COMMENTKEYWORD_API_TOKEN=YOUR_TOKEN commentkeyword -- npx -y github:commentkeyword/instagram-mcp-server#v0.3.1
 ```
 
 ### Claude Desktop, Cursor, Windsurf and other MCP clients
@@ -103,7 +103,7 @@ Add the server to the client's MCP config. For Claude Desktop that file is `clau
   "mcpServers": {
     "commentkeyword": {
       "command": "npx",
-      "args": ["-y", "github:commentkeyword/instagram-mcp-server#v0.3.0"],
+      "args": ["-y", "github:commentkeyword/instagram-mcp-server#v0.3.1"],
       "env": { "COMMENTKEYWORD_API_TOKEN": "YOUR_TOKEN" }
     }
   }

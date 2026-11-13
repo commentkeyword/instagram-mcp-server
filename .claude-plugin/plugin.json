@@ -1,6 +1,6 @@
 {
   "name": "commentkeyword",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Plan the \"Comment KEYWORD\" CTA of an Instagram Reel and set up the automatic DM in CommentKeyword from Claude Code.",
   "author": { "name": "CommentKeyword", "url": "https://commentkeyword.com" },
   "homepage": "https://commentkeyword.com/instagram-mcp-server",

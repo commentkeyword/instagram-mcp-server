@@ -120,7 +120,7 @@ The same operations are available as MCP tools (`create_keyword`, `update_keywor
 [commentkeyword/instagram-mcp-server](https://github.com/commentkeyword/instagram-mcp-server):
 
 ```bash
-claude mcp add --transport stdio --env COMMENTKEYWORD_API_TOKEN=YOUR_TOKEN commentkeyword -- npx -y github:commentkeyword/instagram-mcp-server#v0.3.0
+claude mcp add --transport stdio --env COMMENTKEYWORD_API_TOKEN=YOUR_TOKEN commentkeyword -- npx -y github:commentkeyword/instagram-mcp-server#v0.3.1
 ```
 
 `/comment-dm` works with either.
