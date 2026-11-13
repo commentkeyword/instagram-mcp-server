@@ -158,6 +158,9 @@ test('next_post target arms the keyword for the next upload', async () => {
   const result = await client.call('create_keyword', { target: 'next_post', keyword: 'GUIDE', dmMessages: ['Here it is {{namefirst}}: https://example.com'] });
   assert.equal(result.isError, undefined);
   assert.match(result.content[0].text, /waiting for the next post/);
+  // A new keyword comes with the steps to test it, from another account.
+  assert.match(result.content[0].text, /comment "GUIDE" on the next post or reel the account publishes from a different Instagram account/);
+  assert.match(result.content[0].text, /own comments never trigger an automation/);
   // Says plainly that DMs can't go out, without the keyword-slot note or upgrade links.
   assert.match(result.content[0].text, /Heads-up: This month's Free plan DMs are used up \(300 of 300\)\./);
   assert.doesNotMatch(result.content[0].text, /slots|upgrade|checkout/i);

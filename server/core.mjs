@@ -446,10 +446,39 @@ export function summarizeUsage(result) {
   return lines.join('\n');
 }
 
+const TEST_PLACE = {
+  any_post: 'on any post or reel of the connected account',
+  chosen_posts: 'on one of the posts chosen for it',
+  next_post: 'on the next post or reel the account publishes',
+};
+
+// How the user can try a keyword that was just created. Testing with your own comment is
+// the most common reason a new automation "does nothing": Instagram never lets an account
+// DM itself, so the connected account's own comments are ignored.
+export function howToTestKeyword(data) {
+  if (!data?.keyword) return '';
+  const hasPosts = Array.isArray(data.mediaIds) && data.mediaIds.length > 0;
+  const place = data.scope !== 'post_specific' ? 'any_post' : hasPosts ? 'chosen_posts' : 'next_post';
+  return [
+    data.isActive !== false
+      ? 'How to test it:'
+      : 'It is paused, so nothing is sent yet. After activating it (update_keyword with isActive true), test it like this:',
+    `comment "${data.keyword}" ${TEST_PLACE[place]} from a different Instagram account (the connected account's own comments never trigger an automation).`,
+    `That account should get the DM within a minute${data.publicReplyEnabled === true ? ', and the public reply appears under its comment' : ''}.`,
+    'get_keyword_stats shows whether the comment triggered it. Pass these steps on to the user.',
+  ].join(' ');
+}
+
 // After saving an active keyword, say plainly if DMs can't go out (Free quota used up, a
 // failed payment, Instagram to reconnect). API versions without /usage are skipped.
-function summarizeSaved(client) {
-  return async (result) => {
+// A keyword that was just created also gets the steps to test it.
+function summarizeSaved(client, { created = false } = {}) {
+  const withTestSteps = async (result) => {
+    const summary = await withWarnings(result);
+    const steps = created ? howToTestKeyword(result?.data) : '';
+    return steps ? `${summary}\n${steps}` : summary;
+  };
+  const withWarnings = async (result) => {
     const summary = summarizeKeyword(result);
     if (!result?.data?.isActive) return summary;
     try {
@@ -460,13 +489,14 @@ function summarizeSaved(client) {
       return summary;
     }
   };
+  return withTestSteps;
 }
 
 export function createHandlers(client) {
   return {
     list_keywords: (args) => [client.listKeywords(args)],
     get_keyword: ({ id }) => [client.getKeyword(id), summarizeKeyword],
-    create_keyword: ({ target: t, mediaIds, ...rest }) => [client.createKeyword({ ...rest, ...scopeFor(t, mediaIds) }), summarizeSaved(client)],
+    create_keyword: ({ target: t, mediaIds, ...rest }) => [client.createKeyword({ ...rest, ...scopeFor(t, mediaIds) }), summarizeSaved(client, { created: true })],
     update_keyword: ({ id, target: t, mediaIds, ...rest }) => [
       client.updateKeyword(id, { ...rest, ...(t ? scopeFor(t, mediaIds) : mediaIds ? { mediaIds } : {}) }),
       summarizeSaved(client),
