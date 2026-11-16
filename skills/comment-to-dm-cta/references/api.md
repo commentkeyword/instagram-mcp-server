@@ -4,7 +4,7 @@ Use these only when the CommentKeyword MCP tools are not available.
 
 - **Base URL:** `https://commentkeyword.com/api`
 - **Auth:** `Authorization: Bearer $COMMENTKEYWORD_API_TOKEN`
-  - The token is a workspace-scoped personal access token, created in the dashboard under Settings → API.
+  - The token is a workspace-scoped personal access token, created in the dashboard under Settings → API & MCP.
   - Permissions: `keywords:read`, `keywords:write`, `keywords:delete`, `agents:read`.
 - **Full spec:** https://commentkeyword.com/openapi.json
 - **Docs:** https://commentkeyword.com/api-docs

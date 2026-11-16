@@ -20,7 +20,7 @@ the video is ready, then publish. Use `all_posts` to listen on every post.
 
 1. Create a CommentKeyword account and connect your Instagram professional account. API access is
    included on every plan, Free too.
-2. In **Settings → API**, create a token with `keywords:read` and `keywords:write`.
+2. In **Settings → API & MCP**, create a token with `keywords:read` and `keywords:write`.
 3. In n8n, import the JSON (**Workflows → Import from file**).
 4. Open **Create the automation** and add a **Header Auth** credential: name `Authorization`, value
    `Bearer <your token>`.

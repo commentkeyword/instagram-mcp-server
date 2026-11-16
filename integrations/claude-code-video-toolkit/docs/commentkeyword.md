@@ -20,7 +20,7 @@ the video is still in the edit and publish afterwards (with `/publish-social` or
 
 1. **Create an account** at [commentkeyword.com](https://commentkeyword.com).
 2. **Connect Instagram.** It must be a professional account (Business or Creator).
-3. **Create a token** under **Settings → API**
+3. **Create a token** under **Settings → API & MCP**
    ([commentkeyword.com/settings?tab=api](https://commentkeyword.com/settings?tab=api)) with
    `keywords:read` and `keywords:write`. The token works for one workspace and can be revoked there.
 4. **Add it to `.env`:**

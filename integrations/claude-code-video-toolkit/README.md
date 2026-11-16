@@ -36,7 +36,7 @@ already toolkit dependencies.
 
 1. Create an account at [commentkeyword.com](https://commentkeyword.com) and connect an Instagram
    professional (Business or Creator) account.
-2. Create a token under [Settings → API](https://commentkeyword.com/settings?tab=api) with
+2. Create a token under [Settings → API & MCP](https://commentkeyword.com/settings?tab=api) with
    `keywords:read` and `keywords:write`.
 3. Put `COMMENTKEYWORD_API_TOKEN` in `.env`.
 4. Check it without creating anything:

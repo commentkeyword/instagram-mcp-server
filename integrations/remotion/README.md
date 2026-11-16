@@ -57,7 +57,7 @@ import { CommentBox } from "./comment-box/CommentBox";
 ## Fill it from your automation
 
 1. Create the automation first: in CommentKeyword, or by asking your agent with the [MCP server](../../README.md) ("anyone who comments GUIDE on my next Reel gets the guide by DM").
-2. Read it into props. You need an API token from **Settings → API** with `keywords:read`:
+2. Read it into props. You need an API token from **Settings → API & MCP** with `keywords:read`:
 
    ```bash
    COMMENTKEYWORD_API_TOKEN=YOUR_TOKEN node src/comment-box/commentkeyword.mjs GUIDE --name Maria > props.json

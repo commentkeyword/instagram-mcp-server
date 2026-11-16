@@ -92,7 +92,7 @@ export function pickAutomation(automations, keyword) {
  * `warnings` lists anything that would make the video promise something the account won't do.
  */
 export async function commentBoxProps(keyword, { token, apiUrl, name, handle, dm = true, avatar = true } = {}) {
-  if (!token) throw new Error("Set COMMENTKEYWORD_API_TOKEN (Settings → API, with keywords:read).");
+  if (!token) throw new Error("Set COMMENTKEYWORD_API_TOKEN (Settings → API & MCP, with keywords:read).");
   const opts = { token, ...(apiUrl ? { apiUrl } : {}) };
   const [automations, account] = await Promise.all([listKeywords(opts), getAccount(opts)]);
   const warnings = [];

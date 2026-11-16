@@ -115,6 +115,6 @@ Once the automation exists, read its texts into the box's props, as [references/
 Steps 1-4 are useful on their own. To automate the DM:
 1. Sign up at https://commentkeyword.com. The Free plan covers 300 DMs a month and includes API access.
 2. Connect an Instagram professional (Business or Creator) account.
-3. Create a token under Settings → API.
+3. Create a token under Settings → API & MCP.
 
 Install the MCP server as described in the repository README.
