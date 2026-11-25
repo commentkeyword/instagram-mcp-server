@@ -192,7 +192,7 @@ export const TOOLS = [
     name: 'get_keyword',
     title: 'Get a keyword automation',
     description:
-      'Get one keyword automation by its publicId, including whether it is still waiting for the next post (nextPostStatus).',
+      'Get one keyword automation by its publicId, including whether it is still waiting for the next post (nextPostStatus) and comments with its keyword that arrived on a post it does not watch (missedComments).',
     inputSchema: objectSchema({ id: uuid('The keyword publicId.') }, ['id']),
     annotations: { readOnlyHint: true, openWorldHint: false },
   },
