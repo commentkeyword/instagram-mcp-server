@@ -45,8 +45,8 @@ No extra Python dependencies (`requests` and `python-dotenv` are core toolkit de
 ```bash
 # Next post or reel (default), with a public reply and click tracking
 uv run tools/commentkeyword.py --keyword GUIDE \
-    --dm "Here's the guide, {{namefirst}}: https://example.com/guide" \
-    --dm "As promised, {{namefirst}}, the guide: https://example.com/guide" \
+    --dm "Here's the guide 👉 https://example.com/guide" \
+    --dm "As promised, here's the guide: https://example.com/guide" \
     --reply "Sent! Check your DMs" --track-links --json-out
 
 # A post that's already live (Instagram media ID)
@@ -69,7 +69,7 @@ uv run tools/commentkeyword.py --list --search guide --json-out
 | Option | Description |
 |--------|-------------|
 | `--keyword` | Create an automation for this word |
-| `--dm` | DM text; repeat for variants (one is picked per person). Up to 1,000 characters. Placeholders: `{{handle}}`, `{{name}}`, `{{namefirst}}` |
+| `--dm` | DM text; repeat for variants (one is picked per person). Up to 1,000 characters. Placeholders: `{{handle}}`, `{{name}}`, `{{namefirst}}`. Instagram shares a person's name only once they have messaged the account, so in this first DM `{{name}}`/`{{namefirst}}` usually become their username |
 | `--dm-file` | DM variants from a file, separated by a line with only `---` |
 | `--reply` | Public reply under the comment; repeat for variants. Up to 500 characters. Placeholder: `{{handle}}` only (Instagram doesn't share a commenter's name with public replies) |
 | `--target` | `next_post` (default), `all_posts`, `specific_posts` |

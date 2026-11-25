@@ -19,12 +19,12 @@ Examples:
   # Validate the token, show existing automations with the same word and the
   # request that would be sent. Creates nothing.
   uv run tools/commentkeyword.py --keyword GUIDE \\
-      --dm "Here's the guide, {{namefirst}}: https://example.com/guide" \\
+      --dm "Here's the guide: https://example.com/guide" \\
       --reply "Sent! Check your DMs" --dry-run --json-out
 
   # Create it for the next post or reel
   uv run tools/commentkeyword.py --keyword GUIDE \\
-      --dm "Here's the guide, {{namefirst}}: https://example.com/guide" \\
+      --dm "Here's the guide: https://example.com/guide" \\
       --reply "Sent! Check your DMs" --track-links --json-out
 
   # Reuse an existing automation for a new video, check on it, pause it
@@ -404,7 +404,8 @@ def main():
     mode.add_argument("--list", action="store_true", help="List automations")
 
     parser.add_argument("--dm", action="append", help="DM text; repeat for variants (one is picked per person). "
-                        "Placeholders: {{handle}} {{name}} {{namefirst}}")
+                        "Placeholders: {{handle}} {{name}} {{namefirst}} (the name ones become the username "
+                        "for people who have never messaged the account)")
     parser.add_argument("--dm-file", help="DM variants from a file, separated by a line containing only ---")
     parser.add_argument("--reply", action="append", help="Public reply under the comment; repeat for variants. "
                         "Placeholder: {{handle}} only (Instagram doesn't share a commenter's name there)")

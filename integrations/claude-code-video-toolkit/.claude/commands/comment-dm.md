@@ -57,7 +57,7 @@ comment CTA, offer to add one. If it has a CTA but nothing to send, ask what the
 | Field | How to derive |
 |-------|---------------|
 | `keyword` | From Step 2 |
-| `dm` | First line delivers the promise, with the link: `Here's the guide, {{namefirst}}: https://...`. Up to 1,000 characters. 2-3 variants (`--dm` repeated) read less robotic. Placeholders: `{{handle}}`, `{{name}}`, `{{namefirst}}`. |
+| `dm` | First line delivers the promise, with the link: `Here's the guide 👉 https://...`. Up to 1,000 characters. 2-3 variants (`--dm` repeated) read less robotic. Placeholders: `{{handle}}`, `{{name}}`, `{{namefirst}}`. Instagram shares a person's name only once they have messaged the account, so in this first DM `{{name}}`/`{{namefirst}}` usually become their username: a greeting without the name reads better. |
 | `reply` | Optional public reply under the comment, e.g. `Sent! Check your DMs`. Up to 500 characters. Shows other viewers that it works. Only `{{handle}}` works here: Instagram doesn't share a commenter's name with public replies. |
 | `target` | `next_post` (default) for a video that isn't published yet. `specific_posts` + `--media-id` for one already live. `all_posts` only if the keyword is unique to an evergreen offer. |
 | `trackLinks` | `--track-links` if the user wants click counts |
@@ -72,7 +72,7 @@ them.** An automation sends real messages to real people. Never skip this confir
 ```bash
 uv run tools/commentkeyword.py \
   --keyword GUIDE \
-  --dm "Here's the guide, {{namefirst}}: https://example.com/guide" \
+  --dm "Here's the guide 👉 https://example.com/guide" \
   --reply "Sent! Check your DMs" \
   --track-links \
   --dry-run --json-out
@@ -117,7 +117,7 @@ Comment-to-DM ready
 
 Keyword:  GUIDE (whole word)
 Posts:    the next post or reel this Instagram account publishes
-DM:       "Here's the guide, {{namefirst}}: https://..."
+DM:       "Here's the guide 👉 https://..."
 Reply:    "Sent! Check your DMs"
 Status:   waiting
 ```

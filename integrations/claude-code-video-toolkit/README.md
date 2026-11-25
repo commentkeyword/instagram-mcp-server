@@ -59,7 +59,7 @@ Or call the script directly:
 
 ```bash
 uv run tools/commentkeyword.py --keyword GUIDE \
-    --dm "Here's the guide, {{namefirst}}: https://example.com/guide" \
+    --dm "Here's the guide 👉 https://example.com/guide" \
     --reply "Sent! Check your DMs" --json-out
 ```
 
