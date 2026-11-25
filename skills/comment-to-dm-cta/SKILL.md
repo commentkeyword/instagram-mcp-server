@@ -55,11 +55,11 @@ Use the exact same word everywhere:
 ## 4. Write the DM (and an optional public reply)
 
 - **Deliver the promise in the first line, with the link.** Keep it short.
-  - Example: `Here's the guide, {{namefirst}} 👉 https://example.com/guide`
-  - Placeholders: `{{handle}}`, `{{name}}`, `{{namefirst}}`.
+  - Example: `Here's the guide 👉 https://example.com/guide`
+  - Placeholders: `{{handle}}`, `{{name}}`, `{{namefirst}}`. Instagram shares a person's name only once they have messaged the account, so in this first DM most people get their username instead of `{{namefirst}}`: a greeting without the name reads better.
   - Limit: 1,000 characters.
 - **Several variants** (2-3 wordings, up to 10) feel less robotic. One is picked at random for each person. The same goes for public replies.
-- **A public reply** under the comment (e.g. `Sent! Check your DMs {{namefirst}} 📩`) shows other viewers that it works. That brings in more comments. Limit: 500 characters.
+- **A public reply** under the comment (e.g. `{{handle}} sent! Check your DMs 📩`) shows other viewers that it works. That brings in more comments. Limit: 500 characters. Replies can use only `{{handle}}` (it mentions the person): Instagram doesn't share a commenter's name there, and the API refuses `{{name}}`/`{{namefirst}}` in replies.
 - **Track link clicks** (`trackLinks`) if the user wants click numbers.
 - **AI agent (optional, paid plans).** Call `list_agents`. If the workspace already has a Live agent that fits the offer (e.g. a sales or booking agent), offer to attach it with `aiAgentId`: it takes over when the person replies to the DM. Agents are created and edited in the CommentKeyword dashboard, not from here. If there's none, skip this step. On the Free plan an attached agent is ignored.
 - **What Instagram allows** (so set expectations):
@@ -71,7 +71,7 @@ Use the exact same word everywhere:
 
 Show the user a summary and wait for an explicit OK, because this messages real people:
 
-> **Keyword:** GUIDE (contains) · **Posts:** next post or reel you publish · **DM:** "Here's the guide, {{namefirst}} 👉 …" (+2 variants) · **Public reply:** "Sent! Check your DMs 📩" · **AI agent:** none
+> **Keyword:** GUIDE (contains) · **Posts:** next post or reel you publish · **DM:** "Here's the guide 👉 …" (+2 variants) · **Public reply:** "Sent! Check your DMs 📩" · **AI agent:** none
 
 Choose the target:
 

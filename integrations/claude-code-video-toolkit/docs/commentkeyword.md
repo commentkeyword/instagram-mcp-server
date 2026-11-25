@@ -71,7 +71,7 @@ uv run tools/commentkeyword.py --list --search guide --json-out
 | `--keyword` | Create an automation for this word |
 | `--dm` | DM text; repeat for variants (one is picked per person). Up to 1,000 characters. Placeholders: `{{handle}}`, `{{name}}`, `{{namefirst}}` |
 | `--dm-file` | DM variants from a file, separated by a line with only `---` |
-| `--reply` | Public reply under the comment; repeat for variants. Up to 500 characters |
+| `--reply` | Public reply under the comment; repeat for variants. Up to 500 characters. Placeholder: `{{handle}}` only (Instagram doesn't share a commenter's name with public replies) |
 | `--target` | `next_post` (default), `all_posts`, `specific_posts` |
 | `--media-id` | Instagram media ID, for `specific_posts`; repeatable |
 | `--exact` | Match only when the whole comment is the keyword (default: whole word anywhere in the comment) |

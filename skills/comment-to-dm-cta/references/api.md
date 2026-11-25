@@ -28,8 +28,8 @@ curl -s -X POST https://commentkeyword.com/api/keywords \
     "keyword": "GUIDE",
     "scope": "post_specific",
     "includeNextPost": true,
-    "dmMessages": ["Here is the guide, {{namefirst}} 👉 https://example.com/guide"],
-    "commentReplies": ["Sent! Check your DMs {{namefirst}} 📩"],
+    "dmMessages": ["Here is the guide 👉 https://example.com/guide"],
+    "commentReplies": ["{{handle}} sent! Check your DMs 📩"],
     "trackLinks": true
   }'
 ```
@@ -49,10 +49,10 @@ curl -s -X POST https://commentkeyword.com/api/keywords \
 | Field | Notes |
 |---|---|
 | `keyword` | Required, up to 100 characters. Case-insensitive. |
-| `dmMessages` | Required: at least one variant, up to 1,000 rendered characters each. Placeholders: `{{handle}}`, `{{name}}`, `{{namefirst}}`. |
+| `dmMessages` | Required: at least one variant, up to 1,000 rendered characters each. Placeholders: `{{handle}}`, `{{name}}`, `{{namefirst}}`. The name ones fall back to the username for people who have never messaged the account. |
 | `matchMode` | `contains` (default; whole-word match in space-separated scripts) or `exact`. |
 | `matchWithoutAccents` | Only for keywords with Latin accents. |
-| `commentReplies` | Public reply variants, up to 500 characters each. |
+| `commentReplies` | Public reply variants, up to 500 characters each. Only `{{handle}}`: Instagram doesn't share a commenter's name with public replies, so `{{name}}` and `{{namefirst}}` are refused with `400`. |
 | `publicReplyEnabled` | Defaults to `true` when `commentReplies` is not empty. |
 | `trackLinks` | Boolean. |
 | `isActive` | Default `true`. A paused keyword doesn't count toward the plan's active-keyword limit. |

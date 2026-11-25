@@ -58,7 +58,7 @@ comment CTA, offer to add one. If it has a CTA but nothing to send, ask what the
 |-------|---------------|
 | `keyword` | From Step 2 |
 | `dm` | First line delivers the promise, with the link: `Here's the guide, {{namefirst}}: https://...`. Up to 1,000 characters. 2-3 variants (`--dm` repeated) read less robotic. Placeholders: `{{handle}}`, `{{name}}`, `{{namefirst}}`. |
-| `reply` | Optional public reply under the comment, e.g. `Sent! Check your DMs`. Up to 500 characters. Shows other viewers that it works. |
+| `reply` | Optional public reply under the comment, e.g. `Sent! Check your DMs`. Up to 500 characters. Shows other viewers that it works. Only `{{handle}}` works here: Instagram doesn't share a commenter's name with public replies. |
 | `target` | `next_post` (default) for a video that isn't published yet. `specific_posts` + `--media-id` for one already live. `all_posts` only if the keyword is unique to an evergreen offer. |
 | `trackLinks` | `--track-links` if the user wants click counts |
 

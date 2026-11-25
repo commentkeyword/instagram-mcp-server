@@ -27,7 +27,8 @@ the video is ready, then publish. Use `all_posts` to listen on every post.
 5. Edit **Your automation** and run the workflow.
 
 The automation messages real people who comment the keyword, so check the text first. The DM can use
-`{{namefirst}}`, `{{name}}` and `{{handle}}`, which are filled in per person.
+`{{namefirst}}`, `{{name}}` and `{{handle}}`, which are filled in per person. Instagram shares a person's name only once
+they have messaged your account; until then the name placeholders show their username.
 
 ## Errors
 

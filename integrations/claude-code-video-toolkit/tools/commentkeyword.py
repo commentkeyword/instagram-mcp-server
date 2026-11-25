@@ -406,7 +406,8 @@ def main():
     parser.add_argument("--dm", action="append", help="DM text; repeat for variants (one is picked per person). "
                         "Placeholders: {{handle}} {{name}} {{namefirst}}")
     parser.add_argument("--dm-file", help="DM variants from a file, separated by a line containing only ---")
-    parser.add_argument("--reply", action="append", help="Public reply under the comment; repeat for variants")
+    parser.add_argument("--reply", action="append", help="Public reply under the comment; repeat for variants. "
+                        "Placeholder: {{handle}} only (Instagram doesn't share a commenter's name there)")
     parser.add_argument("--target", choices=TARGETS, default="next_post",
                         help="next_post (default): the next post or reel published; all_posts; specific_posts")
     parser.add_argument("--media-id", action="append", help="Instagram media ID (for specific_posts); repeatable")
