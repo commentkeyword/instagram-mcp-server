@@ -8,13 +8,13 @@
     "url": "https://github.com/commentkeyword/instagram-mcp-server",
     "source": "github"
   },
-  "version": "0.3.1",
+  "version": "0.3.2",
   "packages": [
     {
       "registryType": "mcpb",
-      "identifier": "https://github.com/commentkeyword/instagram-mcp-server/releases/download/v0.3.1/commentkeyword-mcp-0.3.1.mcpb",
-      "version": "0.3.1",
-      "fileSha256": "6c97fcb4ee2e527f6f4a391364e6d930b5059851641262a7b33fa8827ba09c31",
+      "identifier": "https://github.com/commentkeyword/instagram-mcp-server/releases/download/v0.3.2/commentkeyword-mcp-0.3.2.mcpb",
+      "version": "0.3.2",
+      "fileSha256": "4217ae59b1db602a414f5853a6e6c90e178f7b8a8f30e848300d403cb0d20c3f",
       "transport": {
         "type": "stdio"
       },
