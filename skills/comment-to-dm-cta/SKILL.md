@@ -62,6 +62,7 @@ Use the exact same word everywhere:
 - **A public reply** under the comment (e.g. `{{handle}} sent! Check your DMs 📩`) shows other viewers that it works. That brings in more comments. Limit: 500 characters. Replies can use only `{{handle}}` (it mentions the person): Instagram doesn't share a commenter's name there, and the API refuses `{{name}}`/`{{namefirst}}` in replies.
 - **Track link clicks** (`trackLinks`) if the user wants click numbers.
 - **AI agent (optional, paid plans).** Call `list_agents`. If the workspace already has a Live agent that fits the offer (e.g. a sales or booking agent), offer to attach it with `aiAgentId`: it takes over when the person replies to the DM. Agents are created and edited in the CommentKeyword dashboard, not from here. If there's none, skip this step. On the Free plan an attached agent is ignored.
+- **Only for followers (optional, paid plans).** Only if the user wants commenters to follow first: set `followGateEnabled` with the four `followGateMessages` texts, written in the audience's language (the first one says to follow and tap the button, or reply with its text on a computer). People who already follow get the DM at once; people who never follow never get it, so it trades some reach for followers.
 - **What Instagram allows** (so set expectations):
   - The DM is a *private reply* to the comment: one message per comment, sent within 7 days of it.
   - The conversation can only go further if the person writes back.

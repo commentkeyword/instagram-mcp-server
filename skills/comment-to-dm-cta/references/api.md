@@ -57,6 +57,8 @@ curl -s -X POST https://commentkeyword.com/api/keywords \
 | `trackLinks` | Boolean. |
 | `isActive` | Default `true`. A paused keyword doesn't count toward the plan's active-keyword limit. |
 | `aiAgentId` | publicId of a Live agent from `GET /agents`, or `null`. |
+| `followGateEnabled` | Only for followers (paid plans; `403 follow_gate_unavailable` on Free). Commenters who don't follow yet get `followGateMessages.message` with a button; the DM goes out once they follow. Needs all four texts. |
+| `followGateMessages` | `{ "message", "buttonLabel", "checkingMessage", "notFollowingMessage" }`, all required while the gate is on; sending it replaces all four. Texts up to 640 characters, the button up to 20. The button only works in Instagram's phone app, so `message` should also say what to reply. |
 
 ## Update, pause, re-arm, delete
 

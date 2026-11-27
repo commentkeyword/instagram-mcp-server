@@ -140,7 +140,7 @@ Without the MCP server, the skill still plans the CTA and the DM. It can also ca
 
 | Tool | What it does |
 |---|---|
-| `create_keyword` | Create an automation. `target` is `next_post`, `all_posts` or `specific_posts`. Also takes up to 10 DM variants, up to 10 public reply variants, link tracking, and an existing AI agent to attach (`aiAgentId`, paid plans). |
+| `create_keyword` | Create an automation. `target` is `next_post`, `all_posts` or `specific_posts`. Also takes up to 10 DM variants, up to 10 public reply variants, link tracking, an existing AI agent to attach (`aiAgentId`, paid plans), and "only for followers" (`followGateEnabled` with its four `followGateMessages`, paid plans). |
 | `update_keyword` | Change any field. Re-arm it for the next upload with `target: "next_post"`, or pause it with `isActive: false`. |
 | `list_keywords` / `get_keyword` | Check for conflicts and see whether the next post was caught (`nextPostStatus`). |
 | `delete_keyword` | Delete an automation. Asks for confirmation when an AI agent is attached. |
