@@ -410,7 +410,7 @@ function summarizeKeyword(result) {
   if (!data) return 'Done.';
   const parts = [`Keyword "${data.keyword}" (${data.publicId}) is ${data.isActive ? 'active' : 'paused'}.`];
   if (data.scope === 'global') parts.push('It triggers on every post.');
-  if (data.followGateEnabled) parts.push('Only for followers is on: while the workspace has a paid plan, commenters are asked to follow first (people who already follow just tap the button) and get the DM once Instagram confirms the follow; without a paid plan the DM goes to everyone.');
+  if (data.followGateEnabled) parts.push('Only for followers is on: while the workspace has a paid plan, commenters are asked to follow first (people who already follow usually just tap the button; if they messaged the account before, the DM can go out directly) and get the DM once Instagram confirms the follow; without a paid plan the DM goes to everyone.');
   if (data.nextPostStatus === 'waiting') parts.push('It is waiting for the next post or reel; it attaches itself once that post gets its first comments.');
   if (data.nextPostStatus === 'attached') parts.push(`It caught the next post (media ${data.nextPostMediaId}).`);
   if (data.nextPostStatus === 'reconnect_required') parts.push('Instagram needs to be reconnected in CommentKeyword before it can catch the next post.');
